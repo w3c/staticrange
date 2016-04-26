@@ -82,7 +82,7 @@ it to the user as a `StaticRange`.
 ## Example Usage
 
 One example of where a `StaticRange` would be immediately useful is with the
-`beforeinput` event. This event has a need to specify a selection range however we don't
+`beforeinput` event. This event has a need to specify a selection range, however we don't
 want the user agent to have to maintain a full `Range` for the lifetime of the event object.
 
 Here is example code showing how a user might access the current selection range during
@@ -98,7 +98,7 @@ Here is example code showing how a user might access the current selection range
                 // Empty selection. Input will happen at insertion point.
                 ...
             } else {
-                // Selected text will be replaced with input.
+                // Currently selected text will be replaced with input.
                 ...
             }
         } else {
