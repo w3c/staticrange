@@ -2,8 +2,12 @@
 
 DRAFT
 
-This proposal is for a lightweight `StaticRange` that can be used in place of a
-Range when the complexity of a full `Range` is not necessary.
+This proposal is for a lightweight `StaticRange` that can be used
+instead of a `Range` when the complexity of a full `Range` is not necessary.
+
+It is intended that all current uses of `Range` would remain unchanged, but
+new APIs or objects would make use of `StaticRange` (unless they required
+a full `Range`).
 
 ## Background
 
@@ -31,85 +35,80 @@ object is active, the `Range` will be active and it will need to be updated for
 every DOM mutation. In this manner, an application can end up with many active
 `Range` objects even if none of them are being used.
 
+Because of this performance cost, there is a strong desire from browser vendors that
+new objects or APIs should not require a `Range`. The purpose of this proposal is to
+create a variant of `Range` (one without the performance cost) that can be used in 
+new API, event, and object proposals.
+
 ## Proposal
 
 A simple, lightweight `StaticRange` that contains only a start and an end boundary
 (node + offset). A `StaticRange` does not update when the DOM is mutated.
 
-The `toRange` method on `StaticRange` allows it to be up-converted to a full-featured
-`Range` if the application requires the additional functionality provided by a `Range`.
+A `collapsed` attribute would be maintained as a convenient way to determine if the
+start and end boundaries were at the same location.
 
-## IDL
+The `toRange` method on `StaticRange` creates a full-featured `Range` object that is
+up-converted from the `StaticRange`. This would only be used if the application
+required the additional functionality provided by a `Range`.
 
-    [Constructor, Exposed=Window]
-    interface StaticRange {
-      readonly attribute Node startContainer;
-      readonly attribute unsigned long startOffset;
-      readonly attribute Node endContainer;
-      readonly attribute unsigned long endOffset;
-      readonly attribute boolean collapsed;
-    
-      void setStart(Node node, unsigned long offset);
-      void setEnd(Node node, unsigned long offset);
-    
-      [NewObject] Range toRange();
-    };
-
-#### *node* = *staticrange* . `startContainer`
-
-Returns staticrange’s start node.
-
-#### *offset* = *staticrange* . `startOffset`
-
-Returns staticrange’s start offset.
-
-#### *node* = *staticrange* . `endContainer`
-
-Returns staticrange’s end node.
-
-#### *offset* = *staticrange* . `endOffset`
-
-Returns staticrange’s end offset.
-
-#### *collapsed* = *staticrange* . `collapsed`
-
-Returns `true` if *staticrange*’s start and end are the same, and `false` otherwise.
-
-#### *staticrange* . `setStart(node, offset)`
-
-Set the start node and offset. If start > end, then swap boundaries. Update collapsed.
-
-#### *staticrange* . `setEnd(node, offset)`
-
-Set the end node and offset. If start > end, then swap boundaries. Update collapsed.
-
-#### *range* = *staticrange* . `toRange()`
-
-Returns a new `Range` with the same start and end as the context object. This is a
-convenience method that is equivalent to:
-
-    var newRange = document.createRange()
-    newRange.selStart(staticRange.startContainer, staticRange.startOffset);
-    newRange.selEnd(staticRange.endContainer, staticRange.endOffset);
-
-## Ranges and Event Handlers
+## Note on Ranges and Event Handlers
 
 Event handlers cause a particular problem for ranges because the DOM can be
-modified during the event handler, potentially invaliding the range. A `Range`
-will keep being updated in face of these DOM mutations but a `StaticRange` will
-not. Since the same event needs to be sent to each handler in the event handler
-chain, using a `StaticRange` would (unfortunately) force the user agent to send
-an invalid `StaticRange` to subsequent event handlers in that case.
+modified during the event handler, potentially invaliding the range.
+Using a `Range` on the event would ensure that the range is kept up-to-date with
+the DOM changes, but, as noted earlier, a `Range` is (often wastefully) expensive
+to maintain.
 
-Thus, when a selection range is required on an `Event`, it is recommended that a method
-(e.g., `getRanges()`) be added to that `Event` that can be used when the user
-needs the range. This method will take a snapshot of the current range and return
-it to the user. Note that the alternative of using a `Range` is not recommended because it
-must keep the range updated whenever the DOM is mutated, even if the range is
-never actually used. 
+Unfortunately, using a `StaticRange` in this situation is not an option because if
+the DOM is updated in the event handler, then the range snapshot passed to the first
+event handler might now be invalid. We can't take a new snapshot and send that to
+subsequent event handlers because we need to make sure that we send the same event
+to each handler.
+That leaves us with the option of passing an invalid range to the subsequent events,
+which is undesirable.
 
-Because of the problems listed above, under no circumstances should a
-`StaticRange` be used as an `Event` attribute.
+To summarize these problems with ranges on events:
+
+* `StaticRange` is not appropriate because DOM mutations during the event handler
+can result in an invalid range being sent.
+* `Range` is not appropriate because it is expensive to maintain.
+
+To work around these problems, it is recommended that, when an `Event` requires a
+selection range, a new method (e.g., `getRanges()`) should be added to the `Event`
+that can be used when the user needs the range.
+This method will take a snapshot of the current range and return
+it to the user as a `StaticRange`.
+
+## Example Usage
+
+One example of where a `StaticRange` would be immediately useful is with the
+`beforeinput` event. This event has a need to specify a selection range however we don't
+want the user agent to have to maintain a full `Range` for the lifetime of the event object.
+
+Here is example code showing how a user might access the current selection range during
+`beforeinput`:
+
+    var beforeinputHandler = function(e) {
+        // Get current selection ranges.
+        var ranges = e.getRanges();
+        if (ranges.length == 1) {
+            // Handle single selection.
+            var range = ranges[0];
+            if (range.collapsed) {
+                // Empty selection. Input will happen at insertion point.
+                ...
+            } else {
+                // Selected text will be replaced with input.
+                ...
+            }
+        } else {
+            // Handle multi-selection.
+            ...
+        }
+    }
+    
+    element.addEventListener('beforeinput', beforeinputHandler, false);
 
 ## Acknowledgements
 
