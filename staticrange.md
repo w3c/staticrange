@@ -44,12 +44,12 @@ new API, event, and object proposals.
 A simple, lightweight `StaticRange` that contains only a start and an end boundary
 (node + offset). A `StaticRange` does not update when the DOM is mutated.
 
-A `collapsed` attribute would be maintained as a convenient way to determine if the
+A `collapsed` attribute would also be provided as a convenient way to determine if the
 start and end boundaries were at the same location.
 
-The `toRange` method on `StaticRange` creates a full-featured `Range` object that is
-up-converted from the `StaticRange`. This would only be used if the application
-required the additional functionality provided by a `Range`.
+A `toRange` method on `StaticRange` would be used to create a full-featured `Range`
+object that is up-converted from the `StaticRange`. This would only be used if the
+application required the additional functionality provided by a `Range`.
 
 ## Note on Ranges and Event Handlers
 
