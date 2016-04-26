@@ -63,7 +63,7 @@ Unfortunately, using a `StaticRange` in this situation is not an option because 
 the DOM is updated in the event handler, then the range snapshot passed to the first
 event handler might now be invalid. We can't take a new snapshot and send that to
 subsequent event handlers because we need to make sure that we send the same event
-to each handler.
+to each handler in the chain.
 That leaves us with the option of passing an invalid range to the subsequent events,
 which is undesirable.
 
