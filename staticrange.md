@@ -6,8 +6,7 @@ This proposal is for a lightweight `StaticRange` that can be used
 instead of a `Range` when the complexity of a full `Range` is not necessary.
 
 It is intended that all current uses of `Range` would remain unchanged, but
-new APIs or objects would make use of `StaticRange` (unless they required
-a full `Range`).
+new APIs or objects would make use of `StaticRange`.
 
 ## Background
 
