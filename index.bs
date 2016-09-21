@@ -1,0 +1,200 @@
+<h1>Static Range</h1>
+
+<pre class="metadata">
+Shortname: staticrange
+Level:
+Group: uievents
+Status: WD
+TR: http://www.w3.org/TR/staticrange/
+ED: https://github.com/w3c/staticrange/
+Repository: garykac/staticrange
+Previous Version:
+	<none>
+Editor: Gary Kacmarcik, Google, garykac@google.com
+Abstract:
+	This specification defines a lightweight StaticRange that can be used in
+	place of a {{Range}} when the complexity of a full {{Range}} is not
+	necessary.
+</pre>
+
+<h2 id="introduction">Introduction</h2>
+
+	DOM4 defines a {{Range}} object (originally from DOM2 Traversal/Range) which
+	can be used to represent a sequence of content in the DOM tree. A {{Range}}
+	consists of a start boundary (a node and an offset) and an end boundary
+	(also a node and an offset). A key benefit of using a {{Range}} is that once
+	it is created, it will maintain the integrity of the range as best it can
+	even in the face of DOM mutations.
+
+	A problem with {{Range}} is that whenever a DOM mutation occurs, all of the
+	active {{Range}} objects affected by the mutation need to be updated. This
+	can be an expensive operation, especially if there are a large number of
+	active {{Range}} objects. This cost may be acceptable if all of these
+	{{Range}} objects are actually needed by the application, but {{Range}} is
+	used whenever we need to record start- and end-positions. Because of this,
+	many of the {{Range}} objects that are created are not actually used by the
+	application, and many of the {{Range}} objects that are being used don’t
+	actually need their range start and end to be resilient to DOM mutations.
+
+	This problem is exacerbated when an application caches an object that
+	happens to contain a {{Range}} along with other data that the application
+	needs. As long as this object is active, the {{Range}} will be active and it
+	will need to be updated for every DOM mutation. In this manner, an
+	application can end up with many active {{Range}} objects even if none of
+	them are being used.
+
+	A StaticRange is a simple, lightweight range that contains only a start and
+	an end boundary (node + offset) and does not update when the DOM is mutated.
+
+<h2 id="staticrange">StaticRange</h3>
+
+	<h3 id="interface-staticrange">Interface StaticRange</h3>
+
+		The {{StaticRange}} interface provides attributes that track the start
+		and end position of the range, and a readonly boolean attribute that
+		indicates whether or not the current range is collapsed to a single
+		position (where the start equals the end position).
+
+		To create an instance of the {{StaticRange}} interface, use the
+		{{StaticRange}} constructor. The start and end position attributes can
+		be set directly, or by using
+		{{StaticRange/setStart()}} and {{StaticRange/setEnd()}}.
+
+		<pre class="idl" data-highlight="webidl" dfn-for="StaticRange">
+		[Constructor, Exposed=Window]
+		interface StaticRange {
+			attribute Node startContainer;
+			attribute unsigned long startOffset;
+			attribute Node endContainer;
+			attribute unsigned long endOffset;
+			readonly attribute boolean collapsed;
+
+			void setStart(Node node, unsigned long offset);
+			void setEnd(Node node, unsigned long offset);
+
+			[NewObject] Range toRange();
+		};
+		</pre>
+
+		<dl>
+			<dt><code>StaticRange . startContainer</code></dt>
+			<dd>
+				The start {{Node}} for the range.
+			</dd>
+
+			<dt><code>StaticRange . startOffset</code></dt>
+			<dd>
+				The offset into the start node for the range that identifies
+				the starting position of the range.
+			</dd>
+
+			<dt><code>StaticRange . endContainer</code></dt>
+			<dd>
+				The end node for the range.
+			</dd>
+
+			<dt><code>StaticRange . endOffset</code></dt>
+			<dd>
+				The offset into the end node for the range that identifies
+				the ending position of the range.
+			</dd>
+
+			<dt><code>StaticRange . collapsed</code></dt>
+			<dd>
+				True if the range's start and end position are the same,
+				otherwise this is False.
+			</dd>
+
+			<dt><code>StaticRange . setStart()</code></dt>
+			<dd>
+				Sets the start position ({{StaticRange/startContainer}} and
+				{{StaticRange/startOffset}}) for this range.
+
+				If the given start position is located after the current end
+				position, then the current end position will be copied to the
+				start position and the given position will set the range's end
+				position.
+
+				The {{StaticRange/collapsed}} attribute will be updated based on
+				the updated range.
+
+				<dl class="parameters">
+					<dt>Node node</dt>
+					<dd>
+						The {{Node}} that contains the starting position of this
+						range.
+					</dd>
+
+					<dt>unsigned long offset</dt>
+					<dd>
+						The offset into the given {{Node}} that identifies the
+						exact starting position for the range.
+					</dd>
+				</dl>
+			</dd>
+
+			<dt><code>StaticRange . setEnd()</code></dt>
+			<dd>
+				Sets the end position ({{StaticRange/endContainer}} and
+				{{StaticRange/endOffset}}) for this range.
+
+				If the given end position is located before the current start
+				position, then the current start position will be copied to the
+				end position and the given position will set the range's start
+				position.
+
+				The {{StaticRange/collapsed}} attribute will be updated based on
+				the updated range.
+
+				<dl class="parameters">
+					<dt>Node node</dt>
+					<dd>
+						The {{Node}} that contains the ending position of this
+						range.
+					</dd>
+
+					<dt>unsigned long offset</dt>
+					<dd>
+						The offset into the given {{Node}} that identifies the
+						exact ending position for the range.
+					</dd>
+				</dl>
+			</dd>
+
+			<dt><code>StaticRange . toRange()</code></dt>
+			<dd>
+				Returns a new {{Range}} with the same start and end as the
+				context object.
+
+				This is a convenience method to up-convert a StaticRange into a
+				full-featured {{Range}} object that can be used when the
+				application requires the additional functionality provided by a
+				{{Range}}.
+
+				It is equivalent to:
+
+				<pre>
+				    var newRange = document.createRange()
+				    newRange.selStart(staticRange.startContainer, staticRange.startOffset);
+				    newRange.selEnd(staticRange.endContainer, staticRange.endOffset);
+			    </pre>
+			</dd>
+
+		</dl>
+
+<h2 id="acknowledgements-contributors">Acknowledgements</h2>
+
+	Thanks to the following people for the discussions that lead to the creation
+	of this proposal:
+
+	Enrica Casucci (Apple),
+	Bo Cupp (Microsoft),
+	Emil Eklund (Google),
+	Gary Kacmarcik (Google),
+	Ian Kilpatrick (Google),
+	Grisha Lyukshin (Microsoft),
+	Miles Maxfield (Apple),
+	Ryosuke Niwa (Apple),
+	Dave Tapuska (Google),
+	Ojan Vafai (Google),
+	Johannes Wilm (Fidus)

@@ -1,0 +1,336 @@
+<!doctype html><html lang="en">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <title>Static Range </title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="WD" name="w3c-status">
+  <link href="../default.css" rel="stylesheet" type="text/css">
+  <link href="../csslogo.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="styles.css" rel="stylesheet" type="text/css">
+  <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD" rel="stylesheet" type="text/css">
+  <meta content="Bikeshed 1.0.0" name="generator">
+<style>
+        .dfn-panel {
+            display: inline-block;
+            position: absolute;
+            z-index: 35;
+            height: auto;
+            width: -webkit-fit-content;
+            max-width: 300px;
+            max-height: 500px;
+            overflow: auto;
+            padding: 0.5em 0.75em;
+            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+            background: #DDDDDD;
+            color: black;
+            border: outset 0.2em;
+        }
+        .dfn-panel:not(.on) { display: none; }
+        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+        .dfn-panel > b { display: block; }
+        .dfn-panel a { color: black; }
+        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+        .dfn-panel > b + b { margin-top: 0.25em; }
+        .dfn-panel > span { display: list-item; list-style: inside; }
+        .dfn-panel.activated {
+            display: inline-block;
+            position: fixed;
+            left: .5em;
+            bottom: .5em;
+            margin: 0 auto;
+            max-width: calc(100vw - 1.5em - .4em - .5em);
+            max-height: 30vh;
+        }
+
+        .dfn-paneled { cursor: pointer; }
+        </style>
+ <body class="h-entry">
+  <div class="head">
+   <header>
+    <p data-fill-with="logo"><a href="http://www.w3.org/"><img alt="W3C" height="48" src="https://www.w3.org/Icons/w3c_home" width="72"></a></p>
+    <h1 class="p-name no-ref" id="title">Static Range </h1>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">W3C Working Draft, <time class="dt-updated" datetime="2016-09-21">21 September 2016</time></span></h2>
+   </header>
+   <div data-fill-with="spec-metadata">
+    <dl>
+     <dt>This version:
+     <dd><a class="u-url" href="http://www.w3.org/TR/2016/WD-staticrange--20160921/">http://www.w3.org/TR/2016/WD-staticrange--20160921/</a>
+     <dt>Latest version:
+     <dd><a href="http://www.w3.org/TR/staticrange/">http://www.w3.org/TR/staticrange/</a>
+     <dt>Editor's Draft:
+     <dd><a href="https://github.com/w3c/staticrange/">https://github.com/w3c/staticrange/</a>
+     <dt>Previous Versions:
+     <dd><a href="" rel="previous"></a>
+     <dd><a href="<none>" rel="previous">&lt;none></a>
+     <dt>Issue Tracking:
+     <dd><a href="https://github.com/garykac/staticrange/issues/">GitHub</a>
+     <dt class="editor">Editor:
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:garykac@google.com">Gary Kacmarcik</a> (<span class="p-org org">Google</span>)
+    </dl>
+   </div>
+   <div data-fill-with="warning"></div>
+   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply. </p>
+   <hr title="Separator for header">
+  </div>
+  <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
+  <div class="p-summary" data-fill-with="abstract">
+   <p>This specification defines a lightweight StaticRange that can be used in
+
+place of a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> when the complexity of a full <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> is not
+necessary.</p>
+  </div>
+  <h2 class="no-num no-toc no-ref heading settled" id="status"><span class="content">Status of this document</span></h2>
+  <div data-fill-with="status">
+   <p> <em>This section describes the status of this document at the time of its publication. Other
+    documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this
+    technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical
+    reports index</a> at http://www.w3.org/TR/.</em> </p>
+   <p> The management and production of this document follows a relatively complex setup. Details are
+    provided as part of the introduction. </p>
+   <p> This document was published by the <a href="https://www.w3.org/WebPlatform/WG/">Web Platform Working Group</a> as a Working Draft.
+
+    Feedback and comments on this specification are welcome. Please use <a href="https://github.com/w3c/staticrange/issues">Github issues</a> Historical discussions can be found in the <a href="http://lists.w3.org/Archives/Public/public-webapps/">public-webapps@w3.org archives</a>. </p>
+   <p> Publication as a Working Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may
+    be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite
+    this document as other than work in progress. </p>
+   <p> This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="http://www.w3.org/2004/01/pp-impl/40318/status" rel="disclosure">public list of any
+    patent disclosures</a> made in connection with the deliverables of the group; that page also
+    includes instructions for disclosing a patent. An individual who has actual knowledge of a
+    patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+    Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>. </p>
+   <p> This document is governed by the <a href="http://www.w3.org/2015/Process-20150901/" id="w3c_process_revision">1 September 2015 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>. </p>
+   <p></p>
+  </div>
+  <div data-fill-with="at-risk"></div>
+  <nav data-fill-with="table-of-contents" id="toc">
+   <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
+   <ol class="toc" role="directory">
+    <li><a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
+    <li>
+     <a href="#staticrange"><span class="secno">2</span> <span class="content">StaticRange</span></a>
+     <ol class="toc">
+      <li><a href="#interface-staticrange"><span class="secno">2.1</span> <span class="content">Interface StaticRange</span></a>
+     </ol>
+    <li><a href="#acknowledgements-contributors"><span class="secno">3</span> <span class="content">Acknowledgements</span></a>
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
+     </ol>
+    <li>
+     <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
+     <ol class="toc">
+      <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
+     </ol>
+    <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
+   </ol>
+  </nav>
+  <main>
+   <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
+   <p>DOM4 defines a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> object (originally from DOM2 Traversal/Range) which
+	can be used to represent a sequence of content in the DOM tree. A <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> consists of a start boundary (a node and an offset) and an end boundary
+	(also a node and an offset). A key benefit of using a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> is that once
+	it is created, it will maintain the integrity of the range as best it can
+	even in the face of DOM mutations.</p>
+   <p>A problem with <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> is that whenever a DOM mutation occurs, all of the
+	active <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> objects affected by the mutation need to be updated. This
+	can be an expensive operation, especially if there are a large number of
+	active <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> objects. This cost may be acceptable if all of these <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> objects are actually needed by the application, but <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> is
+	used whenever we need to record start- and end-positions. Because of this,
+	many of the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> objects that are created are not actually used by the
+	application, and many of the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> objects that are being used don’t
+	actually need their range start and end to be resilient to DOM mutations.</p>
+   <p>This problem is exacerbated when an application caches an object that
+	happens to contain a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> along with other data that the application
+	needs. As long as this object is active, the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> will be active and it
+	will need to be updated for every DOM mutation. In this manner, an
+	application can end up with many active <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> objects even if none of
+	them are being used.</p>
+   <p>A StaticRange is a simple, lightweight range that contains only a start and
+	an end boundary (node + offset) and does not update when the DOM is mutated.</p>
+   <h2 class="heading settled" data-level="2" id="staticrange"><span class="secno">2. </span><span class="content">StaticRange</span><a class="self-link" href="#staticrange"></a></h2>
+   <h3 class="heading settled" data-level="2.1" id="interface-staticrange"><span class="secno">2.1. </span><span class="content">Interface StaticRange</span><a class="self-link" href="#interface-staticrange"></a></h3>
+   <p>The <code class="idl"><a data-link-type="idl" href="#staticrange-staticrange" id="ref-for-staticrange-staticrange-1">StaticRange</a></code> interface provides attributes that track the start
+		and end position of the range, and a readonly boolean attribute that
+		indicates whether or not the current range is collapsed to a single
+		position (where the start equals the end position).</p>
+   <p>To create an instance of the <code class="idl"><a data-link-type="idl" href="#staticrange-staticrange" id="ref-for-staticrange-staticrange-2">StaticRange</a></code> interface, use the <code class="idl"><a data-link-type="idl" href="#staticrange-staticrange" id="ref-for-staticrange-staticrange-3">StaticRange</a></code> constructor. The start and end position attributes can
+		be set directly, or by using <code class="idl"><a data-link-type="idl" href="#dom-staticrange-setstart" id="ref-for-dom-staticrange-setstart-1">setStart()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-staticrange-setend" id="ref-for-dom-staticrange-setend-1">setEnd()</a></code>.</p>
+<pre class="idl def" data-highlight="webidl">[<dfn class="idl-code" data-dfn-for="StaticRange" data-dfn-type="constructor" data-export="" data-lt="StaticRange()" id="dom-staticrange-staticrange">Constructor<a class="self-link" href="#dom-staticrange-staticrange"></a></dfn>, Exposed=Window]
+interface <dfn class="dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="interface" data-export="" id="staticrange-staticrange">StaticRange<span class="dfn-panel"><b><a href="#staticrange-staticrange">#staticrange-staticrange</a></b><b>Referenced in:</b><span><a href="#ref-for-staticrange-staticrange-1">2.1. Interface StaticRange</a> <a href="#ref-for-staticrange-staticrange-2">(2)</a> <a href="#ref-for-staticrange-staticrange-3">(3)</a></span></span></dfn> {
+  attribute <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="Node " id="dom-staticrange-startcontainer">startContainer<span class="dfn-panel"><b><a href="#dom-staticrange-startcontainer">#dom-staticrange-startcontainer</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-staticrange-startcontainer-1">2.1. Interface StaticRange</a></span></span></dfn>;
+  attribute unsigned long <dfn class="dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="unsigned long " id="dom-staticrange-startoffset">startOffset<span class="dfn-panel"><b><a href="#dom-staticrange-startoffset">#dom-staticrange-startoffset</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-staticrange-startoffset-1">2.1. Interface StaticRange</a></span></span></dfn>;
+  attribute <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="Node " id="dom-staticrange-endcontainer">endContainer<span class="dfn-panel"><b><a href="#dom-staticrange-endcontainer">#dom-staticrange-endcontainer</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-staticrange-endcontainer-1">2.1. Interface StaticRange</a></span></span></dfn>;
+  attribute unsigned long <dfn class="dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="unsigned long " id="dom-staticrange-endoffset">endOffset<span class="dfn-panel"><b><a href="#dom-staticrange-endoffset">#dom-staticrange-endoffset</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-staticrange-endoffset-1">2.1. Interface StaticRange</a></span></span></dfn>;
+  readonly attribute boolean <dfn class="dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean " id="dom-staticrange-collapsed">collapsed<span class="dfn-panel"><b><a href="#dom-staticrange-collapsed">#dom-staticrange-collapsed</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-staticrange-collapsed-1">2.1. Interface StaticRange</a> <a href="#ref-for-dom-staticrange-collapsed-2">(2)</a></span></span></dfn>;
+
+  void <dfn class="dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="method" data-export="" data-lt="setStart(node, offset)" id="dom-staticrange-setstart">setStart<span class="dfn-panel"><b><a href="#dom-staticrange-setstart">#dom-staticrange-setstart</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-staticrange-setstart-1">2.1. Interface StaticRange</a></span></span></dfn>(<a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="idl-code" data-dfn-for="StaticRange/setStart(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setstart-node-offset-node">node<a class="self-link" href="#dom-staticrange-setstart-node-offset-node"></a></dfn>, unsigned long <dfn class="idl-code" data-dfn-for="StaticRange/setStart(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setstart-node-offset-offset">offset<a class="self-link" href="#dom-staticrange-setstart-node-offset-offset"></a></dfn>);
+  void <dfn class="dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="method" data-export="" data-lt="setEnd(node, offset)" id="dom-staticrange-setend">setEnd<span class="dfn-panel"><b><a href="#dom-staticrange-setend">#dom-staticrange-setend</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-staticrange-setend-1">2.1. Interface StaticRange</a></span></span></dfn>(<a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="idl-code" data-dfn-for="StaticRange/setEnd(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setend-node-offset-node">node<a class="self-link" href="#dom-staticrange-setend-node-offset-node"></a></dfn>, unsigned long <dfn class="idl-code" data-dfn-for="StaticRange/setEnd(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setend-node-offset-offset">offset<a class="self-link" href="#dom-staticrange-setend-node-offset-offset"></a></dfn>);
+
+  [NewObject] <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#range">Range</a> <dfn class="idl-code" data-dfn-for="StaticRange" data-dfn-type="method" data-export="" data-lt="toRange()" id="dom-staticrange-torange">toRange<a class="self-link" href="#dom-staticrange-torange"></a></dfn>();
+};
+</pre>
+   <dl>
+    <dt><code>StaticRange . startContainer</code>
+    <dd> The start <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> for the range. 
+    <dt><code>StaticRange . startOffset</code>
+    <dd> The offset into the start node for the range that identifies
+				the starting position of the range. 
+    <dt><code>StaticRange . endContainer</code>
+    <dd> The end node for the range. 
+    <dt><code>StaticRange . endOffset</code>
+    <dd> The offset into the end node for the range that identifies
+				the ending position of the range. 
+    <dt><code>StaticRange . collapsed</code>
+    <dd> True if the range’s start and end position are the same,
+				otherwise this is False. 
+    <dt><code>StaticRange . setStart()</code>
+    <dd>
+      Sets the start position (<code class="idl"><a data-link-type="idl" href="#dom-staticrange-startcontainer" id="ref-for-dom-staticrange-startcontainer-1">startContainer</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-staticrange-startoffset" id="ref-for-dom-staticrange-startoffset-1">startOffset</a></code>) for this range. 
+     <p>If the given start position is located after the current end
+				position, then the current end position will be copied to the
+				start position and the given position will set the range’s end
+				position.</p>
+     <p>The <code class="idl"><a data-link-type="idl" href="#dom-staticrange-collapsed" id="ref-for-dom-staticrange-collapsed-1">collapsed</a></code> attribute will be updated based on
+				the updated range.</p>
+     <dl class="parameters">
+      <dt>Node node
+      <dd> The <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> that contains the starting position of this
+						range. 
+      <dt>unsigned long offset
+      <dd> The offset into the given <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> that identifies the
+						exact starting position for the range. 
+     </dl>
+    <dt><code>StaticRange . setEnd()</code>
+    <dd>
+      Sets the end position (<code class="idl"><a data-link-type="idl" href="#dom-staticrange-endcontainer" id="ref-for-dom-staticrange-endcontainer-1">endContainer</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-staticrange-endoffset" id="ref-for-dom-staticrange-endoffset-1">endOffset</a></code>) for this range. 
+     <p>If the given end position is located before the current start
+				position, then the current start position will be copied to the
+				end position and the given position will set the range’s start
+				position.</p>
+     <p>The <code class="idl"><a data-link-type="idl" href="#dom-staticrange-collapsed" id="ref-for-dom-staticrange-collapsed-2">collapsed</a></code> attribute will be updated based on
+				the updated range.</p>
+     <dl class="parameters">
+      <dt>Node node
+      <dd> The <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> that contains the ending position of this
+						range. 
+      <dt>unsigned long offset
+      <dd> The offset into the given <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> that identifies the
+						exact ending position for the range. 
+     </dl>
+    <dt><code>StaticRange . toRange()</code>
+    <dd>
+      Returns a new <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> with the same start and end as the
+				context object. 
+     <p>This is a convenience method to up-convert a StaticRange into a
+				full-featured <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code> object that can be used when the
+				application requires the additional functionality provided by a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#range">Range</a></code>.</p>
+     <p>It is equivalent to:</p>
+<pre>var newRange = document.createRange()
+newRange.selStart(staticRange.startContainer, staticRange.startOffset);
+newRange.selEnd(staticRange.endContainer, staticRange.endOffset);
+</pre>
+   </dl>
+   <h2 class="heading settled" data-level="3" id="acknowledgements-contributors"><span class="secno">3. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements-contributors"></a></h2>
+   <p>Thanks to the following people for the discussions that lead to the creation
+	of this proposal:</p>
+   <p>Enrica Casucci (Apple),
+	Bo Cupp (Microsoft),
+	Emil Eklund (Google),
+	Gary Kacmarcik (Google),
+	Ian Kilpatrick (Google),
+	Grisha Lyukshin (Microsoft),
+	Miles Maxfield (Apple),
+	Ryosuke Niwa (Apple),
+	Dave Tapuska (Google),
+	Ojan Vafai (Google),
+	Johannes Wilm (Fidus)</p>
+  </main>
+<script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#dom-staticrange-collapsed">collapsed</a><span>, in §2.1</span>
+   <li><a href="#dom-staticrange-endcontainer">endContainer</a><span>, in §2.1</span>
+   <li><a href="#dom-staticrange-endoffset">endOffset</a><span>, in §2.1</span>
+   <li><a href="#dom-staticrange-setend">setEnd(node, offset)</a><span>, in §2.1</span>
+   <li><a href="#dom-staticrange-setstart">setStart(node, offset)</a><span>, in §2.1</span>
+   <li><a href="#dom-staticrange-startcontainer">startContainer</a><span>, in §2.1</span>
+   <li><a href="#dom-staticrange-startoffset">startOffset</a><span>, in §2.1</span>
+   <li><a href="#dom-staticrange-staticrange">StaticRange()</a><span>, in §2.1</span>
+   <li><a href="#staticrange-staticrange">StaticRange</a><span>, in §2.1</span>
+   <li><a href="#dom-staticrange-torange">toRange()</a><span>, in §2.1</span>
+  </ul>
+  <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="index">
+   <li>
+    <a data-link-type="biblio" href="#biblio-dom">[dom]</a> defines the following terms:
+    <ul>
+     <li><a href="https://dom.spec.whatwg.org/#node">Node</a>
+     <li><a href="https://dom.spec.whatwg.org/#range">Range</a>
+    </ul>
+  </ul>
+  <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
+  <dl>
+   <dt id="biblio-dom"><a class="self-link" href="#biblio-dom"></a>[DOM]
+   <dd>Anne van Kesteren; et al. <a href="https://w3c.github.io/dom/">W3C DOM4</a>. 19 November 2015. REC. URL: <a href="https://w3c.github.io/dom/">https://w3c.github.io/dom/</a>
+  </dl>
+  <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
+<pre class="idl def">[<a href="#dom-staticrange-staticrange">Constructor</a>, Exposed=Window]
+interface <a href="#staticrange-staticrange">StaticRange</a> {
+  attribute <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <a data-type="Node " href="#dom-staticrange-startcontainer">startContainer</a>;
+  attribute unsigned long <a data-type="unsigned long " href="#dom-staticrange-startoffset">startOffset</a>;
+  attribute <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <a data-type="Node " href="#dom-staticrange-endcontainer">endContainer</a>;
+  attribute unsigned long <a data-type="unsigned long " href="#dom-staticrange-endoffset">endOffset</a>;
+  readonly attribute boolean <a data-readonly="" data-type="boolean " href="#dom-staticrange-collapsed">collapsed</a>;
+
+  void <a href="#dom-staticrange-setstart">setStart</a>(<a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <a href="#dom-staticrange-setstart-node-offset-node">node</a>, unsigned long <a href="#dom-staticrange-setstart-node-offset-offset">offset</a>);
+  void <a href="#dom-staticrange-setend">setEnd</a>(<a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <a href="#dom-staticrange-setend-node-offset-node">node</a>, unsigned long <a href="#dom-staticrange-setend-node-offset-offset">offset</a>);
+
+  [NewObject] <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#range">Range</a> <a href="#dom-staticrange-torange">toRange</a>();
+};
+
+</pre>
+<script>
+        document.body.addEventListener("click", function(e) {
+            var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+            // Find the dfn element or panel, if any, that was clicked on.
+            var el = e.target;
+            var target;
+            while(el.parentElement) {
+                if(el.tagName == "DFN") {
+                    target = "dfn";
+                    break;
+                }
+                if(/H\d/.test(el.tagName) && el.getAttribute('data-dfn-type') != null) {
+                    target = "dfn";
+                    break;
+                }
+                if(el.classList.contains("dfn-panel")) {
+                    target = "dfn-panel";
+                    break;
+                }
+                el = el.parentElement;
+            }
+            if(target != "dfn-panel") {
+                // Turn off any currently "on" or "activated" panels.
+                queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+                    el.classList.remove("on");
+                    el.classList.remove("activated");
+                });
+            }
+            if(target == "dfn") {
+                // open the panel
+                var dfnPanel = el.querySelector(".dfn-panel");
+                if(dfnPanel) {
+                    dfnPanel.classList.add("on");
+                }
+            } else if(target == "dfn-panel") {
+                // Switch it to "activated" state, which pins it.
+                el.classList.add("activated");
+            }
+
+        });
+        </script>
