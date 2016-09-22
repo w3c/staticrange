@@ -48,21 +48,21 @@ Abstract:
 
 <h2 id="staticrange">StaticRange</h3>
 
-	<h3 id="interface-staticrange">Interface StaticRange</h3>
+	<h3 id="dictionary-staticrange">Dictionary StaticRange</h3>
 
-		The {{StaticRange}} interface provides attributes that track the start
+		The {{StaticRange}} dictionary provides attributes that track the start
 		and end position of the range, and a readonly boolean attribute that
 		indicates whether or not the current range is collapsed to a single
 		position (where the start equals the end position).
 
-		To create an instance of the {{StaticRange}} interface, use the
+		To create an instance of the {{StaticRange}} dictionary, use the
 		{{StaticRange}} constructor. The start and end position attributes can
 		be set directly, or by using
 		{{StaticRange/setStart()}} and {{StaticRange/setEnd()}}.
 
 		<pre class="idl" data-highlight="webidl" dfn-for="StaticRange">
 		[Constructor, Exposed=Window]
-		interface StaticRange {
+		dictionary StaticRange {
 			attribute Node startContainer;
 			attribute unsigned long startOffset;
 			attribute Node endContainer;
