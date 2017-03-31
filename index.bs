@@ -46,141 +46,128 @@ Abstract:
 	A StaticRange is a simple, lightweight range that contains only a start and
 	an end boundary (node + offset) and does not update when the DOM is mutated.
 
-<h2 id="staticrange">StaticRange</h3>
+<h3 id="interface-staticrange">Interface StaticRange</h3>
 
-	<h3 id="dictionary-staticrange">Dictionary StaticRange</h3>
+	The {{StaticRange}} interface provides attributes that track the start
+	and end position of the range, and a readonly boolean attribute that
+	indicates whether or not the current range is collapsed to a single
+	position (where the start equals the end position).
 
-		The {{StaticRange}} dictionary provides attributes that track the start
-		and end position of the range, and a readonly boolean attribute that
-		indicates whether or not the current range is collapsed to a single
-		position (where the start equals the end position).
+	To create an instance of the {{StaticRange}} interface, use the
+	{{StaticRange}} constructor. The start and end position attributes can
+	be set directly, or by using
+	{{StaticRange/setStart()}} and {{StaticRange/setEnd()}}.
 
-		To create an instance of the {{StaticRange}} dictionary, use the
-		{{StaticRange}} constructor. The start and end position attributes can
-		be set directly, or by using
-		{{StaticRange/setStart()}} and {{StaticRange/setEnd()}}.
+	<pre class="idl" data-highlight="webidl">
+	[Constructor, Exposed=Window]
+	interface StaticRange {
+		attribute Node startContainer;
+		attribute unsigned long startOffset;
+		attribute Node endContainer;
+		attribute unsigned long endOffset;
+		readonly attribute boolean collapsed;
 
-		<pre class="idl" data-highlight="webidl" dfn-for="StaticRange">
-		[Constructor, Exposed=Window]
-		dictionary StaticRange {
-			attribute Node startContainer;
-			attribute unsigned long startOffset;
-			attribute Node endContainer;
-			attribute unsigned long endOffset;
-			readonly attribute boolean collapsed;
+		void setStart(Node node, unsigned long offset);
+		void setEnd(Node node, unsigned long offset);
 
-			void setStart(Node node, unsigned long offset);
-			void setEnd(Node node, unsigned long offset);
+		[NewObject] Range toRange();
+	};
+	</pre>
 
-			[NewObject] Range toRange();
-		};
-		</pre>
+	: <dfn for="StaticRange">startContainer</dfn>
+	:: The start {{Node}} for the range.
 
-		<dl>
-			<dt><code>StaticRange . startContainer</code></dt>
-			<dd>
-				The start {{Node}} for the range.
-			</dd>
+	: <dfn for="StaticRange">startOffset</dfn>
+	:: The offset into the start node for the range that identifies
+		the starting position of the range.
 
-			<dt><code>StaticRange . startOffset</code></dt>
-			<dd>
-				The offset into the start node for the range that identifies
-				the starting position of the range.
-			</dd>
+	: <dfn for="StaticRange">endContainer</dfn>
+	:: The end node for the range.
 
-			<dt><code>StaticRange . endContainer</code></dt>
-			<dd>
-				The end node for the range.
-			</dd>
+	: <dfn for="StaticRange">endOffset</dfn>
+	:: The offset into the end node for the range that identifies
+		the ending position of the range.
 
-			<dt><code>StaticRange . endOffset</code></dt>
-			<dd>
-				The offset into the end node for the range that identifies
-				the ending position of the range.
-			</dd>
+	: <dfn for="StaticRange">collapsed</dfn>
+	:: True if the range's start and end position are the same,
+		otherwise this is False.
 
-			<dt><code>StaticRange . collapsed</code></dt>
-			<dd>
-				True if the range's start and end position are the same,
-				otherwise this is False.
-			</dd>
+	: <dfn for="StaticRange">setStart(node, offset)</dfn>
+	:: Sets the start position ({{StaticRange/startContainer}} and
+		{{StaticRange/startOffset}}) for this range.
 
-			<dt><code>StaticRange . setStart()</code></dt>
-			<dd>
-				Sets the start position ({{StaticRange/startContainer}} and
-				{{StaticRange/startOffset}}) for this range.
+	: <dfn for="StaticRange">setEnd(node, offset)</dfn>
+	:: Sets the end position ({{StaticRange/endContainer}} and
+		{{StaticRange/endOffset}}) for this range.
 
-				If the given start position is located after the current end
-				position, then the current end position will be copied to the
-				start position and the given position will set the range's end
-				position.
+	: <dfn for="StaticRange">toRange()</dfn>
+	:: Returns a new {{Range}} with the same start and end as the
+		context object.
+	:: This is a convenience method to up-convert a StaticRange into a
+		full-featured {{Range}} object that can be used when the
+		application requires the additional functionality provided by a
+		{{Range}}.
 
-				The {{StaticRange/collapsed}} attribute will be updated based on
-				the updated range.
+	:: It is equivalent to:
+			<pre>
+				var newRange = document.createRange()
+				newRange.selStart(staticRange.startContainer, staticRange.startOffset);
+				newRange.selEnd(staticRange.endContainer, staticRange.endOffset);
+			</pre>
 
-				<dl class="parameters">
-					<dt>Node node</dt>
-					<dd>
-						The {{Node}} that contains the starting position of this
-						range.
-					</dd>
 
-					<dt>unsigned long offset</dt>
-					<dd>
-						The offset into the given {{Node}} that identifies the
-						exact starting position for the range.
-					</dd>
-				</dl>
-			</dd>
+<h2 id="algorithms">Algorithms</h3>
 
-			<dt><code>StaticRange . setEnd()</code></dt>
-			<dd>
-				Sets the end position ({{StaticRange/endContainer}} and
-				{{StaticRange/endOffset}}) for this range.
+	A {{StaticRange}} <dfn>position</dfn> is the combination of a {{Node}} and an unsigned
+	long offset into that node.
+	
+	The <dfn>start position</dfn> of a {{StaticRange}} |r| is the [=position=] defined by
+	|r|'s [=startContainer=] and [=startOffset=].
+	
+	The <dfn>end position</dfn> of a {{StaticRange}} |r| is the [=position=] defined by
+	|r|'s [=endContainer=] and [=endOffset=].
 
-				If the given end position is located before the current start
-				position, then the current start position will be copied to the
-				end position and the given position will set the range's start
-				position.
+	<div class="algorithm" data-algorithm="set-the-start-position">
+	<h3 id="to-set-the-start-position"><dfn>set the start position</dfn></h3>
 
-				The {{StaticRange/collapsed}} attribute will be updated based on
-				the updated range.
+		: Input
+		:: |srange|, a {{StaticRange}} to be updated with a new start position
+		:: |node|, a {{Node}} that contains the new start position
+		:: |offset|, an unsigned long that identifies the new start position relative
+			to the start of |node|
+		
+		: Output
+		:: None
 
-				<dl class="parameters">
-					<dt>Node node</dt>
-					<dd>
-						The {{Node}} that contains the ending position of this
-						range.
-					</dd>
+		1. If the given start position is located after the current end
+			position, then the current end position will be copied to the
+			start position and the given position will set the range's end
+			position.
 
-					<dt>unsigned long offset</dt>
-					<dd>
-						The offset into the given {{Node}} that identifies the
-						exact ending position for the range.
-					</dd>
-				</dl>
-			</dd>
+		2. The {{StaticRange/collapsed}} attribute will be updated based on
+			the updated range.
+	</div>
 
-			<dt><code>StaticRange . toRange()</code></dt>
-			<dd>
-				Returns a new {{Range}} with the same start and end as the
-				context object.
+	<div class="algorithm" data-algorithm="set-the-end-position">
+	<h3 id="to-set-the-end-position"><dfn>set the end position</dfn></h3>
+				
+		: Input
+		:: |srange|, a {{StaticRange}} to be updated with a new end position
+		:: |node|, a {{Node}} that contains the desired end position
+		:: |offset|, an unsigned long that identifies the end position relative
+			to the start of |node|
+		
+		: Output
+		:: None
 
-				This is a convenience method to up-convert a StaticRange into a
-				full-featured {{Range}} object that can be used when the
-				application requires the additional functionality provided by a
-				{{Range}}.
+		1. If the given end position is located before the current start
+			position, then the current start position will be copied to the
+			end position and the given position will set the range's start
+			position.
 
-				It is equivalent to:
-
-				<pre>
-				    var newRange = document.createRange()
-				    newRange.selStart(staticRange.startContainer, staticRange.startOffset);
-				    newRange.selEnd(staticRange.endContainer, staticRange.endOffset);
-			    </pre>
-			</dd>
-
-		</dl>
+		2. The {{StaticRange/collapsed}} attribute will be updated based on
+			the updated range.
+	</div>
 
 <h2 id="acknowledgements-contributors">Acknowledgements</h2>
 
