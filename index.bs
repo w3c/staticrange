@@ -78,27 +78,25 @@ Abstract:
 	:: The start {{Node}} for the range.
 
 	: <dfn for="StaticRange">startOffset</dfn>
-	:: The offset into the start node for the range that identifies
-		the starting position of the range.
+	:: The offset into the start node identifying the [=start position=] for the range.
 
 	: <dfn for="StaticRange">endContainer</dfn>
-	:: The end node for the range.
+	:: The end {{Node}} for the range.
 
 	: <dfn for="StaticRange">endOffset</dfn>
-	:: The offset into the end node for the range that identifies
-		the ending position of the range.
+	:: The offset into the start node identifying the [=end position=] for the range.
 
 	: <dfn for="StaticRange">collapsed</dfn>
-	:: True if the range's start and end position are the same,
-		otherwise this is False.
+	:: True if the range's [=start position=] and [=end position=] are the same, as determined by
+		executing [=update collapsed=].
 
 	: <dfn for="StaticRange">setStart(node, offset)</dfn>
-	:: Sets the start position ({{StaticRange/startContainer}} and
-		{{StaticRange/startOffset}}) for this range.
+	:: Sets the [=start position=] for this range by executing [=set the start position=]
+		with node and offset.
 
 	: <dfn for="StaticRange">setEnd(node, offset)</dfn>
-	:: Sets the end position ({{StaticRange/endContainer}} and
-		{{StaticRange/endOffset}}) for this range.
+	:: Sets the [=end position=] for this range by executing [=set the end position=]
+		with node and offset.
 
 	: <dfn for="StaticRange">toRange()</dfn>
 	:: Returns a new {{Range}} with the same start and end as the
@@ -109,64 +107,137 @@ Abstract:
 		{{Range}}.
 
 	:: It is equivalent to:
-			<pre>
-				var newRange = document.createRange()
-				newRange.selStart(staticRange.startContainer, staticRange.startOffset);
-				newRange.selEnd(staticRange.endContainer, staticRange.endOffset);
-			</pre>
+		<pre>
+			var newRange = document.createRange()
+			newRange.selStart(staticRange.startContainer, staticRange.startOffset);
+			newRange.selEnd(staticRange.endContainer, staticRange.endOffset);
+		</pre>
 
 
 <h2 id="algorithms">Algorithms</h3>
 
-	A {{StaticRange}} <dfn>position</dfn> is the combination of a {{Node}} and an unsigned
-	long offset into that node.
+	A {{StaticRange}} <dfn for="StaticRange">position</dfn> is the combination of a
+	{{Node}} <dfn for="StaticRange">position node</dfn> and an unsigned long
+	<dfn for="StaticRange">position offset</dfn> into that node. The [=position offset=]
+	is the offset from the start of the [=position node=] to the desired position.
 	
-	The <dfn>start position</dfn> of a {{StaticRange}} |r| is the [=position=] defined by
-	|r|'s [=startContainer=] and [=startOffset=].
+	The <dfn for="StaticRange">start position</dfn> of a {{StaticRange}} |r| is the
+	[=position=] defined by |r|'s [=startContainer=] and [=startOffset=].
 	
-	The <dfn>end position</dfn> of a {{StaticRange}} |r| is the [=position=] defined by
-	|r|'s [=endContainer=] and [=endOffset=].
+	The <dfn for="StaticRange">end position</dfn> of a {{StaticRange}} |r| is the
+	[=position=] defined by |r|'s [=endContainer=] and [=endOffset=].
 
-	<div class="algorithm" data-algorithm="set-the-start-position">
-	<h3 id="to-set-the-start-position"><dfn>set the start position</dfn></h3>
+	<div class="algorithm" data-algorithm="position-is-less-than">
+	<h3 id="to-position-is-less-than">a [=position=] |p1| <dfn for="StaticRange/position">is less than</dfn> another [=position=] |p2|</h3>
 
 		: Input
-		:: |srange|, a {{StaticRange}} to be updated with a new start position
-		:: |node|, a {{Node}} that contains the new start position
-		:: |offset|, an unsigned long that identifies the new start position relative
-			to the start of |node|
+		:: |p1|, a {{StaticRange}} [=position=]
+		:: |p2|, a {{StaticRange}} [=position=]
+	
+		: Output
+		:: Boolean
+		
+		1. If |p1|'s [=position node=] is earlier in the DOM tree than |p2|'s [=position node=], return True.
+
+		1. If |p1|'s [=position node=] is the same as |p2|'s [=position node=], 
+		
+			1. If |p1|'s [=position offset=] is less than |p2|'s [=position offset=], return True.
+			
+			1. Else, return False.
+		
+		1. Return False.
+	</div>
+
+	<div class="algorithm" data-algorithm="position-is-equal-to">
+	<h3 id="to-position-is-equal-to">a [=position=] |p1| <dfn for="StaticRange/position">is equal to</dfn> another [=position=] |p2|</h3>
+
+		: Input
+		:: |p1|, a {{StaticRange}} [=position=]
+		:: |p2|, a {{StaticRange}} [=position=]
+	
+		: Output
+		:: Boolean
+		
+		1. If |p1|'s [=position node=] is the same as |p2|'s [=position node=], 
+		
+			1. If |p1|'s [=position offset=] is equal to |p2|'s [=position offset=],
+
+				1. Return True.
+					
+		1. Return False.
+	</div>
+
+	<div class="algorithm" data-algorithm="update-collapsed">
+	<h3 id="to-update-collapsed">to <dfn for="StaticRange">update collapsed</dfn></h3>
+
+		: Input
+		:: |sr|, a {{StaticRange}} to be updated
+
+		: Output
+		:: None
+
+		1. If |sr|'s [=start position=] [=StaticRange/position/is equal to=] |sr|'s [=end position=],
+			1. Set |sr|'s [=collapsed=] to True
+		1. Else
+			1. Set |sr|'s [=collapsed=] to False
+	</div>
+
+	<div class="algorithm" data-algorithm="set-the-start-position">
+	<h3 id="to-set-the-start-position">to <dfn for="StaticRange">set the start position</dfn></h3>
+
+		: Input
+		:: |sr|, a {{StaticRange}} to be updated with a new [=start position=]
+		:: |node|, a {{Node}} that contains the [=position node=] of new [=start position=]
+		:: |offset|, an unsigned long that identifies the [=position offset=] of the new
+			[=start position=]
 		
 		: Output
 		:: None
 
-		1. If the given start position is located after the current end
-			position, then the current end position will be copied to the
-			start position and the given position will set the range's end
-			position.
+		1. Let |p| be a [=StaticRange/position=] defined by |node| and |offset|.
+		
+		1. If |p| [=StaticRange/position/is less than=] or [=StaticRange/position/is equal to=] |sr|'s [=end position=], then
+		
+			1. Set |sr|'s [=startContainer=] to |node|.
+			1. Set |sr|'s [=startOffset=] to |offset|.
 
-		2. The {{StaticRange/collapsed}} attribute will be updated based on
-			the updated range.
+		1. Else,
+
+			1. Set |sr|'s [=startContainer=] to [=endContainer=].
+			1. Set |sr|'s [=startOffset=] to [=endOffset=].
+			1. Set |sr|'s [=endContainer=] to |node|.
+			1. Set |sr|'s [=endOffset=] to |offset|.
+
+		2. [=Update collapsed=]
 	</div>
 
 	<div class="algorithm" data-algorithm="set-the-end-position">
-	<h3 id="to-set-the-end-position"><dfn>set the end position</dfn></h3>
+	<h3 id="to-set-the-end-position">to <dfn for="StaticRange">set the end position</dfn></h3>
 				
 		: Input
-		:: |srange|, a {{StaticRange}} to be updated with a new end position
-		:: |node|, a {{Node}} that contains the desired end position
-		:: |offset|, an unsigned long that identifies the end position relative
-			to the start of |node|
+		:: |sr|, a {{StaticRange}} to be updated with a new [=end position=]
+		:: |node|, a {{Node}} that contains the [=position node=] of the new [=end position=]
+		:: |offset|, an unsigned long that identifies the [=position offset=] of the new
+			[=end position=]
 		
 		: Output
 		:: None
 
-		1. If the given end position is located before the current start
-			position, then the current start position will be copied to the
-			end position and the given position will set the range's start
-			position.
+		1. Let |p| be a [=StaticRange/position=] defined by |node| and |offset|.
 
-		2. The {{StaticRange/collapsed}} attribute will be updated based on
-			the updated range.
+		1. If |p| [=StaticRange/position/is less than=] |sr|'s [=start position=], then
+
+			1. Set |sr|'s [=endContainer=] to [=startContainer=].
+			1. Set |sr|'s [=endOffset=] to [=startOffset=].
+			1. Set |sr|'s [=startContainer=] to |node|.
+			1. Set |sr|'s [=startOffset=] to |offset|.
+		
+		1. Else,
+
+			1. Set |sr|'s [=endContainer=] to |node|.
+			1. Set |sr|'s [=endOffset=] to |offset|.
+
+		2. [=Update collapsed=]
 	</div>
 
 <h2 id="acknowledgements-contributors">Acknowledgements</h2>

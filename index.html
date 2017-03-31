@@ -320,8 +320,11 @@ necessary.</p>
     <li>
      <a href="#algorithms"><span class="secno">2</span> <span class="content">Algorithms</span></a>
      <ol class="toc">
-      <li><a href="#to-set-the-start-position"><span class="secno">2.1</span> <span class="content"><span>set the start position</span></span></a>
-      <li><a href="#to-set-the-end-position"><span class="secno">2.2</span> <span class="content"><span>set the end position</span></span></a>
+      <li><a href="#to-position-is-less-than"><span class="secno">2.1</span> <span class="content">a <span>position</span> <var>p1</var> <span>is less than</span> another <span>position</span> <var>p2</var></span></a>
+      <li><a href="#to-position-is-equal-to"><span class="secno">2.2</span> <span class="content">a <span>position</span> <var>p1</var> <span>is equal to</span> another <span>position</span> <var>p2</var></span></a>
+      <li><a href="#to-update-collapsed"><span class="secno">2.3</span> <span class="content">to <span>update collapsed</span></span></a>
+      <li><a href="#to-set-the-start-position"><span class="secno">2.4</span> <span class="content">to <span>set the start position</span></span></a>
+      <li><a href="#to-set-the-end-position"><span class="secno">2.5</span> <span class="content">to <span>set the end position</span></span></a>
      </ol>
     <li><a href="#acknowledgements-contributors"><span class="secno">3</span> <span class="content">Acknowledgements</span></a>
     <li>
@@ -370,11 +373,11 @@ necessary.</p>
 	be set directly, or by using <code class="idl"><a data-link-type="idl" href="#dom-staticrange-setstart" id="ref-for-dom-staticrange-setstart-1">setStart()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-staticrange-setend" id="ref-for-dom-staticrange-setend-1">setEnd()</a></code>.</p>
 <pre class="idl highlight def" data-highlight="webidl">[<dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="constructor" data-export="" data-lt="StaticRange()" id="dom-staticrange-staticrange">Constructor<a class="self-link" href="#dom-staticrange-staticrange"></a></dfn>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Window</span>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="staticrange">StaticRange</dfn> {
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="Node" id="dom-staticrange-startcontainer">startContainer</dfn>;
-  <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="unsigned long" id="dom-staticrange-startoffset">startOffset</dfn>;
-  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="Node" id="dom-staticrange-endcontainer">endContainer</dfn>;
-  <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="unsigned long" id="dom-staticrange-endoffset">endOffset</dfn>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-staticrange-collapsed">collapsed</dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="Node" id="dom-staticrange-startcontainer">startContainer<a class="self-link" href="#dom-staticrange-startcontainer"></a></dfn>;
+  <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="unsigned long" id="dom-staticrange-startoffset">startOffset<a class="self-link" href="#dom-staticrange-startoffset"></a></dfn>;
+  <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="Node" id="dom-staticrange-endcontainer">endContainer<a class="self-link" href="#dom-staticrange-endcontainer"></a></dfn>;
+  <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-type="unsigned long" id="dom-staticrange-endoffset">endOffset<a class="self-link" href="#dom-staticrange-endoffset"></a></dfn>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-staticrange-collapsed">collapsed<a class="self-link" href="#dom-staticrange-collapsed"></a></dfn>;
 
   <span class="kt">void</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="method" data-export="" data-lt="setStart(node, offset)" id="dom-staticrange-setstart">setStart</dfn>(<a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="nv idl-code" data-dfn-for="StaticRange/setStart(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setstart-node-offset-node">node<a class="self-link" href="#dom-staticrange-setstart-node-offset-node"></a></dfn>, <span class="kt">unsigned</span> <span class="kt">long</span> <dfn class="nv idl-code" data-dfn-for="StaticRange/setStart(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setstart-node-offset-offset">offset<a class="self-link" href="#dom-staticrange-setstart-node-offset-offset"></a></dfn>);
   <span class="kt">void</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="StaticRange" data-dfn-type="method" data-export="" data-lt="setEnd(node, offset)" id="dom-staticrange-setend">setEnd</dfn>(<a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="nv idl-code" data-dfn-for="StaticRange/setEnd(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setend-node-offset-node">node<a class="self-link" href="#dom-staticrange-setend-node-offset-node"></a></dfn>, <span class="kt">unsigned</span> <span class="kt">long</span> <dfn class="nv idl-code" data-dfn-for="StaticRange/setEnd(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setend-node-offset-offset">offset<a class="self-link" href="#dom-staticrange-setend-node-offset-offset"></a></dfn>);
@@ -390,30 +393,28 @@ necessary.</p>
     <dt data-md="">
      <p><dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-startoffset">startOffset</dfn></p>
     <dd data-md="">
-     <p>The offset into the start node for the range that identifies
-the starting position of the range.</p>
+     <p>The offset into the start node identifying the <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-1">start position</a> for the range.</p>
     <dt data-md="">
      <p><dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-endcontainer">endContainer</dfn></p>
     <dd data-md="">
-     <p>The end node for the range.</p>
+     <p>The end <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> for the range.</p>
     <dt data-md="">
      <p><dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-endoffset">endOffset</dfn></p>
     <dd data-md="">
-     <p>The offset into the end node for the range that identifies
-the ending position of the range.</p>
+     <p>The offset into the start node identifying the <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-1">end position</a> for the range.</p>
     <dt data-md="">
-     <p><dfn data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-collapsed">collapsed<a class="self-link" href="#staticrange-collapsed"></a></dfn></p>
+     <p><dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-collapsed">collapsed</dfn></p>
     <dd data-md="">
-     <p>True if the range’s start and end position are the same,
-otherwise this is False.</p>
+     <p>True if the range’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-2">start position</a> and <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-2">end position</a> are the same, as determined by
+executing <a data-link-type="dfn" href="#staticrange-update-collapsed" id="ref-for-staticrange-update-collapsed-1">update collapsed</a>.</p>
     <dt data-md="">
      <p><dfn data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-setstart-node-offset">setStart(node, offset)<a class="self-link" href="#staticrange-setstart-node-offset"></a></dfn></p>
     <dd data-md="">
-     <p>Sets the start position (<code class="idl"><a data-link-type="idl" href="#dom-staticrange-startcontainer" id="ref-for-dom-staticrange-startcontainer-1">startContainer</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-staticrange-startoffset" id="ref-for-dom-staticrange-startoffset-1">startOffset</a></code>) for this range.</p>
+     <p>Sets the <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-3">start position</a> for this range by executing <a data-link-type="dfn" href="#staticrange-set-the-start-position" id="ref-for-staticrange-set-the-start-position-1">set the start position</a> with node and offset.</p>
     <dt data-md="">
      <p><dfn data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-setend-node-offset">setEnd(node, offset)<a class="self-link" href="#staticrange-setend-node-offset"></a></dfn></p>
     <dd data-md="">
-     <p>Sets the end position (<code class="idl"><a data-link-type="idl" href="#dom-staticrange-endcontainer" id="ref-for-dom-staticrange-endcontainer-1">endContainer</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-staticrange-endoffset" id="ref-for-dom-staticrange-endoffset-1">endOffset</a></code>) for this range.</p>
+     <p>Sets the <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-3">end position</a> for this range by executing <a data-link-type="dfn" href="#staticrange-set-the-end-position" id="ref-for-staticrange-set-the-end-position-1">set the end position</a> with node and offset.</p>
     <dt data-md="">
      <p><dfn data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-torange">toRange()<a class="self-link" href="#staticrange-torange"></a></dfn></p>
     <dd data-md="">
@@ -431,22 +432,74 @@ newRange.selEnd(staticRange.endContainer, staticRange.endOffset);
 </pre>
    </dl>
    <h2 class="heading settled" data-level="2" id="algorithms"><span class="secno">2. </span><span class="content">Algorithms</span><a class="self-link" href="#algorithms"></a></h2>
-   <p>A <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-4">StaticRange</a></code> <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="position">position</dfn> is the combination of a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> and an unsigned
-	long offset into that node.</p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="start-position">start position<a class="self-link" href="#start-position"></a></dfn> of a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-5">StaticRange</a></code> <var>r</var> is the <a data-link-type="dfn" href="#position" id="ref-for-position-1">position</a> defined by <var>r</var>’s <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-1">startContainer</a> and <a data-link-type="dfn" href="#staticrange-startoffset" id="ref-for-staticrange-startoffset-1">startOffset</a>.</p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="end-position">end position<a class="self-link" href="#end-position"></a></dfn> of a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-6">StaticRange</a></code> <var>r</var> is the <a data-link-type="dfn" href="#position" id="ref-for-position-2">position</a> defined by <var>r</var>’s <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-1">endContainer</a> and <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-1">endOffset</a>.</p>
-   <div class="algorithm" data-algorithm="set-the-start-position">
-    <h3 class="heading settled" data-level="2.1" id="to-set-the-start-position"><span class="secno">2.1. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="set-the-start-position">set the start position<a class="self-link" href="#set-the-start-position"></a></dfn></span><a class="self-link" href="#to-set-the-start-position"></a></h3>
+   <p>A <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-4">StaticRange</a></code> <dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-position">position</dfn> is the combination of a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> <dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-position-node">position node</dfn> and an unsigned long <dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-position-offset">position offset</dfn> into that node. The <a data-link-type="dfn" href="#staticrange-position-offset" id="ref-for-staticrange-position-offset-1">position offset</a> is the offset from the start of the <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-1">position node</a> to the position.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-start-position">start position</dfn> of a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-5">StaticRange</a></code> <var>r</var> is the <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-1">position</a> defined by <var>r</var>’s <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-1">startContainer</a> and <a data-link-type="dfn" href="#staticrange-startoffset" id="ref-for-staticrange-startoffset-1">startOffset</a>.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-end-position">end position</dfn> of a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-6">StaticRange</a></code> <var>r</var> is the <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-2">position</a> defined by <var>r</var>’s <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-1">endContainer</a> and <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-1">endOffset</a>.</p>
+   <div class="algorithm" data-algorithm="position-is-less-than">
+    <h3 class="heading settled" data-level="2.1" id="to-position-is-less-than"><span class="secno">2.1. </span><span class="content">a <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-3">position</a> <var>p1</var> <dfn class="dfn-paneled" data-dfn-for="StaticRange/position" data-dfn-type="dfn" data-noexport="" id="staticrange-position-is-less-than">is less than</dfn> another <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-4">position</a> <var>p2</var></span><a class="self-link" href="#to-position-is-less-than"></a></h3>
     <dl>
      <dt data-md="">
       <p>Input</p>
      <dd data-md="">
-      <p><var>srange</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-7">StaticRange</a></code> to be updated with a new start position</p>
+      <p><var>p1</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-7">StaticRange</a></code> <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-5">position</a></p>
      <dd data-md="">
-      <p><var>node</var>, a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> that contains the new start position</p>
+      <p><var>p2</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-8">StaticRange</a></code> <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-6">position</a></p>
+     <dt data-md="">
+      <p>Output</p>
      <dd data-md="">
-      <p><var>offset</var>, an unsigned long that identifies the new start position relative
-to the start of <var>node</var></p>
+      <p>Boolean</p>
+    </dl>
+    <ol>
+     <li data-md="">
+      <p>If <var>p1</var>’s <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-2">position node</a> is earlier in the DOM tree than <var>p2</var>’s <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-3">position node</a>, return True.</p>
+     <li data-md="">
+      <p>If <var>p1</var>’s <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-4">position node</a> is the same as <var>p2</var>’s <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-5">position node</a>,</p>
+      <ol>
+       <li data-md="">
+        <p>If <var>p1</var>’s <a data-link-type="dfn" href="#staticrange-position-offset" id="ref-for-staticrange-position-offset-2">position offset</a> is less than <var>p2</var>’s <a data-link-type="dfn" href="#staticrange-position-offset" id="ref-for-staticrange-position-offset-3">position offset</a>, return True.</p>
+       <li data-md="">
+        <p>Else, return False.</p>
+      </ol>
+     <li data-md="">
+      <p>Return False.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="position-is-equal-to">
+    <h3 class="heading settled" data-level="2.2" id="to-position-is-equal-to"><span class="secno">2.2. </span><span class="content">a <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-7">position</a> <var>p1</var> <dfn class="dfn-paneled" data-dfn-for="StaticRange/position" data-dfn-type="dfn" data-noexport="" id="staticrange-position-is-equal-to">is equal to</dfn> another <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-8">position</a> <var>p2</var></span><a class="self-link" href="#to-position-is-equal-to"></a></h3>
+    <dl>
+     <dt data-md="">
+      <p>Input</p>
+     <dd data-md="">
+      <p><var>p1</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-9">StaticRange</a></code> <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-9">position</a></p>
+     <dd data-md="">
+      <p><var>p2</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-10">StaticRange</a></code> <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-10">position</a></p>
+     <dt data-md="">
+      <p>Output</p>
+     <dd data-md="">
+      <p>Boolean</p>
+    </dl>
+    <ol>
+     <li data-md="">
+      <p>If <var>p1</var>’s <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-6">position node</a> is the same as <var>p2</var>’s <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-7">position node</a>,</p>
+      <ol>
+       <li data-md="">
+        <p>If <var>p1</var>’s <a data-link-type="dfn" href="#staticrange-position-offset" id="ref-for-staticrange-position-offset-4">position offset</a> is equal to <var>p2</var>’s <a data-link-type="dfn" href="#staticrange-position-offset" id="ref-for-staticrange-position-offset-5">position offset</a>,</p>
+        <ol>
+         <li data-md="">
+          <p>Return True.</p>
+        </ol>
+      </ol>
+     <li data-md="">
+      <p>Return False.</p>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="update-collapsed">
+    <h3 class="heading settled" data-level="2.3" id="to-update-collapsed"><span class="secno">2.3. </span><span class="content">to <dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-update-collapsed">update collapsed</dfn></span><a class="self-link" href="#to-update-collapsed"></a></h3>
+    <dl>
+     <dt data-md="">
+      <p>Input</p>
+     <dd data-md="">
+      <p><var>sr</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-11">StaticRange</a></code> to be updated</p>
      <dt data-md="">
       <p>Output</p>
      <dd data-md="">
@@ -454,27 +507,73 @@ to the start of <var>node</var></p>
     </dl>
     <ol>
      <li data-md="">
-      <p>If the given start position is located after the current end
-position, then the current end position will be copied to the
-start position and the given position will set the range’s end
-position.</p>
+      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-4">start position</a> <a data-link-type="dfn" href="#staticrange-position-is-equal-to" id="ref-for-staticrange-position-is-equal-to-1">is equal to</a> <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-4">end position</a>,</p>
+      <ol>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-collapsed" id="ref-for-staticrange-collapsed-1">collapsed</a> to True</p>
+      </ol>
      <li data-md="">
-      <p>The <code class="idl"><a data-link-type="idl" href="#dom-staticrange-collapsed" id="ref-for-dom-staticrange-collapsed-1">collapsed</a></code> attribute will be updated based on
-the updated range.</p>
+      <p>Else</p>
+      <ol>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-collapsed" id="ref-for-staticrange-collapsed-2">collapsed</a> to False</p>
+      </ol>
+    </ol>
+   </div>
+   <div class="algorithm" data-algorithm="set-the-start-position">
+    <h3 class="heading settled" data-level="2.4" id="to-set-the-start-position"><span class="secno">2.4. </span><span class="content">to <dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-set-the-start-position">set the start position</dfn></span><a class="self-link" href="#to-set-the-start-position"></a></h3>
+    <dl>
+     <dt data-md="">
+      <p>Input</p>
+     <dd data-md="">
+      <p><var>sr</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-12">StaticRange</a></code> to be updated with a new <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-5">start position</a></p>
+     <dd data-md="">
+      <p><var>node</var>, a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> that contains the <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-8">position node</a> of new <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-6">start position</a></p>
+     <dd data-md="">
+      <p><var>offset</var>, an unsigned long that identifies the <a data-link-type="dfn" href="#staticrange-position-offset" id="ref-for-staticrange-position-offset-6">position offset</a> of the new <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-7">start position</a></p>
+     <dt data-md="">
+      <p>Output</p>
+     <dd data-md="">
+      <p>None</p>
+    </dl>
+    <ol>
+     <li data-md="">
+      <p>Let <var>p</var> be a <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-11">position</a> defined by <var>node</var> and <var>offset</var>.</p>
+     <li data-md="">
+      <p>If <var>p</var> <a data-link-type="dfn" href="#staticrange-position-is-less-than" id="ref-for-staticrange-position-is-less-than-1">is less than</a> or <a data-link-type="dfn" href="#staticrange-position-is-equal-to" id="ref-for-staticrange-position-is-equal-to-2">is equal to</a> <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-5">end position</a>, then</p>
+      <ol>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-2">startContainer</a> to <var>node</var>.</p>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startoffset" id="ref-for-staticrange-startoffset-2">startOffset</a> to <var>offset</var>.</p>
+      </ol>
+     <li data-md="">
+      <p>Else,</p>
+      <ol>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-3">startContainer</a> to <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-2">endContainer</a>.</p>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startoffset" id="ref-for-staticrange-startoffset-3">startOffset</a> to <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-2">endOffset</a>.</p>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-3">endContainer</a> to <var>node</var>.</p>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-3">endOffset</a> to <var>offset</var>.</p>
+      </ol>
+     <li data-md="">
+      <p><a data-link-type="dfn" href="#staticrange-update-collapsed" id="ref-for-staticrange-update-collapsed-2">Update collapsed</a></p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="set-the-end-position">
-    <h3 class="heading settled" data-level="2.2" id="to-set-the-end-position"><span class="secno">2.2. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="set-the-end-position">set the end position<a class="self-link" href="#set-the-end-position"></a></dfn></span><a class="self-link" href="#to-set-the-end-position"></a></h3>
+    <h3 class="heading settled" data-level="2.5" id="to-set-the-end-position"><span class="secno">2.5. </span><span class="content">to <dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-set-the-end-position">set the end position</dfn></span><a class="self-link" href="#to-set-the-end-position"></a></h3>
     <dl>
      <dt data-md="">
       <p>Input</p>
      <dd data-md="">
-      <p><var>srange</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-8">StaticRange</a></code> to be updated with a new end position</p>
+      <p><var>sr</var>, a <code class="idl"><a data-link-type="idl" href="#staticrange" id="ref-for-staticrange-13">StaticRange</a></code> to be updated with a new <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-6">end position</a></p>
      <dd data-md="">
-      <p><var>node</var>, a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> that contains the desired end position</p>
+      <p><var>node</var>, a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#node">Node</a></code> that contains the <a data-link-type="dfn" href="#staticrange-position-node" id="ref-for-staticrange-position-node-9">position node</a> of the new <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-7">end position</a></p>
      <dd data-md="">
-      <p><var>offset</var>, an unsigned long that identifies the end position relative
-to the start of <var>node</var></p>
+      <p><var>offset</var>, an unsigned long that identifies the <a data-link-type="dfn" href="#staticrange-position-offset" id="ref-for-staticrange-position-offset-7">position offset</a> of the new <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-8">end position</a></p>
      <dt data-md="">
       <p>Output</p>
      <dd data-md="">
@@ -482,13 +581,29 @@ to the start of <var>node</var></p>
     </dl>
     <ol>
      <li data-md="">
-      <p>If the given end position is located before the current start
-position, then the current start position will be copied to the
-end position and the given position will set the range’s start
-position.</p>
+      <p>Let <var>p</var> be a <a data-link-type="dfn" href="#staticrange-position" id="ref-for-staticrange-position-12">position</a> defined by <var>node</var> and <var>offset</var>.</p>
      <li data-md="">
-      <p>The <code class="idl"><a data-link-type="idl" href="#dom-staticrange-collapsed" id="ref-for-dom-staticrange-collapsed-2">collapsed</a></code> attribute will be updated based on
-the updated range.</p>
+      <p>If <var>p</var> <a data-link-type="dfn" href="#staticrange-position-is-less-than" id="ref-for-staticrange-position-is-less-than-2">is less than</a> <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-8">start position</a>, then</p>
+      <ol>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-4">endContainer</a> to <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-4">startContainer</a>.</p>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-4">endOffset</a> to <a data-link-type="dfn" href="#staticrange-startoffset" id="ref-for-staticrange-startoffset-4">startOffset</a>.</p>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-5">startContainer</a> to <var>node</var>.</p>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startoffset" id="ref-for-staticrange-startoffset-5">startOffset</a> to <var>offset</var>.</p>
+      </ol>
+     <li data-md="">
+      <p>Else,</p>
+      <ol>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-5">endContainer</a> to <var>node</var>.</p>
+       <li data-md="">
+        <p>Set <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-5">endOffset</a> to <var>offset</var>.</p>
+      </ol>
+     <li data-md="">
+      <p><a data-link-type="dfn" href="#staticrange-update-collapsed" id="ref-for-staticrange-update-collapsed-3">Update collapsed</a></p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="3" id="acknowledgements-contributors"><span class="secno">3. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements-contributors"></a></h2>
@@ -528,8 +643,12 @@ the updated range.</p>
      <li><a href="#dom-staticrange-endoffset">attribute for StaticRange</a><span>, in §1.1</span>
      <li><a href="#staticrange-endoffset">dfn for StaticRange</a><span>, in §1.1</span>
     </ul>
-   <li><a href="#end-position">end position</a><span>, in §2</span>
-   <li><a href="#position">position</a><span>, in §2</span>
+   <li><a href="#staticrange-end-position">end position</a><span>, in §2</span>
+   <li><a href="#staticrange-position-is-equal-to">is equal to</a><span>, in §2.2</span>
+   <li><a href="#staticrange-position-is-less-than">is less than</a><span>, in §2.1</span>
+   <li><a href="#staticrange-position">position</a><span>, in §2</span>
+   <li><a href="#staticrange-position-node">position node</a><span>, in §2</span>
+   <li><a href="#staticrange-position-offset">position offset</a><span>, in §2</span>
    <li>
     setEnd(node, offset)
     <ul>
@@ -542,8 +661,8 @@ the updated range.</p>
      <li><a href="#dom-staticrange-setstart">method for StaticRange</a><span>, in §1.1</span>
      <li><a href="#staticrange-setstart-node-offset">dfn for StaticRange</a><span>, in §1.1</span>
     </ul>
-   <li><a href="#set-the-end-position">set the end position</a><span>, in §2.2</span>
-   <li><a href="#set-the-start-position">set the start position</a><span>, in §2.1</span>
+   <li><a href="#staticrange-set-the-end-position">set the end position</a><span>, in §2.5</span>
+   <li><a href="#staticrange-set-the-start-position">set the start position</a><span>, in §2.4</span>
    <li>
     startContainer
     <ul>
@@ -556,7 +675,7 @@ the updated range.</p>
      <li><a href="#dom-staticrange-startoffset">attribute for StaticRange</a><span>, in §1.1</span>
      <li><a href="#staticrange-startoffset">dfn for StaticRange</a><span>, in §1.1</span>
     </ul>
-   <li><a href="#start-position">start position</a><span>, in §2</span>
+   <li><a href="#staticrange-start-position">start position</a><span>, in §2</span>
    <li><a href="#dom-staticrange-staticrange">StaticRange()</a><span>, in §1.1</span>
    <li><a href="#staticrange">StaticRange</a><span>, in §1.1</span>
    <li>
@@ -565,6 +684,7 @@ the updated range.</p>
      <li><a href="#dom-staticrange-torange">method for StaticRange</a><span>, in §1.1</span>
      <li><a href="#staticrange-torange">dfn for StaticRange</a><span>, in §1.1</span>
     </ul>
+   <li><a href="#staticrange-update-collapsed">update collapsed</a><span>, in §2.3</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -610,39 +730,11 @@ the updated range.</p>
    <ul>
     <li><a href="#ref-for-staticrange-1">1.1. Interface StaticRange</a> <a href="#ref-for-staticrange-2">(2)</a> <a href="#ref-for-staticrange-3">(3)</a>
     <li><a href="#ref-for-staticrange-4">2. Algorithms</a> <a href="#ref-for-staticrange-5">(2)</a> <a href="#ref-for-staticrange-6">(3)</a>
-    <li><a href="#ref-for-staticrange-7">2.1. set the start position</a>
-    <li><a href="#ref-for-staticrange-8">2.2. set the end position</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-staticrange-startcontainer">
-   <b><a href="#dom-staticrange-startcontainer">#dom-staticrange-startcontainer</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-staticrange-startcontainer-1">1.1. Interface StaticRange</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-staticrange-startoffset">
-   <b><a href="#dom-staticrange-startoffset">#dom-staticrange-startoffset</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-staticrange-startoffset-1">1.1. Interface StaticRange</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-staticrange-endcontainer">
-   <b><a href="#dom-staticrange-endcontainer">#dom-staticrange-endcontainer</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-staticrange-endcontainer-1">1.1. Interface StaticRange</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-staticrange-endoffset">
-   <b><a href="#dom-staticrange-endoffset">#dom-staticrange-endoffset</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-staticrange-endoffset-1">1.1. Interface StaticRange</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-staticrange-collapsed">
-   <b><a href="#dom-staticrange-collapsed">#dom-staticrange-collapsed</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-staticrange-collapsed-1">2.1. set the start position</a>
-    <li><a href="#ref-for-dom-staticrange-collapsed-2">2.2. set the end position</a>
+    <li><a href="#ref-for-staticrange-7">2.1. a position p1 is less than another position p2</a> <a href="#ref-for-staticrange-8">(2)</a>
+    <li><a href="#ref-for-staticrange-9">2.2. a position p1 is equal to another position p2</a> <a href="#ref-for-staticrange-10">(2)</a>
+    <li><a href="#ref-for-staticrange-11">2.3. to update collapsed</a>
+    <li><a href="#ref-for-staticrange-12">2.4. to set the start position</a>
+    <li><a href="#ref-for-staticrange-13">2.5. to set the end position</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-staticrange-setstart">
@@ -661,30 +753,120 @@ the updated range.</p>
    <b><a href="#staticrange-startcontainer">#staticrange-startcontainer</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-staticrange-startcontainer-1">2. Algorithms</a>
+    <li><a href="#ref-for-staticrange-startcontainer-2">2.4. to set the start position</a> <a href="#ref-for-staticrange-startcontainer-3">(2)</a>
+    <li><a href="#ref-for-staticrange-startcontainer-4">2.5. to set the end position</a> <a href="#ref-for-staticrange-startcontainer-5">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="staticrange-startoffset">
    <b><a href="#staticrange-startoffset">#staticrange-startoffset</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-staticrange-startoffset-1">2. Algorithms</a>
+    <li><a href="#ref-for-staticrange-startoffset-2">2.4. to set the start position</a> <a href="#ref-for-staticrange-startoffset-3">(2)</a>
+    <li><a href="#ref-for-staticrange-startoffset-4">2.5. to set the end position</a> <a href="#ref-for-staticrange-startoffset-5">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="staticrange-endcontainer">
    <b><a href="#staticrange-endcontainer">#staticrange-endcontainer</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-staticrange-endcontainer-1">2. Algorithms</a>
+    <li><a href="#ref-for-staticrange-endcontainer-2">2.4. to set the start position</a> <a href="#ref-for-staticrange-endcontainer-3">(2)</a>
+    <li><a href="#ref-for-staticrange-endcontainer-4">2.5. to set the end position</a> <a href="#ref-for-staticrange-endcontainer-5">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="staticrange-endoffset">
    <b><a href="#staticrange-endoffset">#staticrange-endoffset</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-staticrange-endoffset-1">2. Algorithms</a>
+    <li><a href="#ref-for-staticrange-endoffset-2">2.4. to set the start position</a> <a href="#ref-for-staticrange-endoffset-3">(2)</a>
+    <li><a href="#ref-for-staticrange-endoffset-4">2.5. to set the end position</a> <a href="#ref-for-staticrange-endoffset-5">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="position">
-   <b><a href="#position">#position</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="staticrange-collapsed">
+   <b><a href="#staticrange-collapsed">#staticrange-collapsed</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-position-1">2. Algorithms</a> <a href="#ref-for-position-2">(2)</a>
+    <li><a href="#ref-for-staticrange-collapsed-1">2.3. to update collapsed</a> <a href="#ref-for-staticrange-collapsed-2">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-position">
+   <b><a href="#staticrange-position">#staticrange-position</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-position-1">2. Algorithms</a> <a href="#ref-for-staticrange-position-2">(2)</a>
+    <li><a href="#ref-for-staticrange-position-3">2.1. a position p1 is less than another position p2</a> <a href="#ref-for-staticrange-position-4">(2)</a> <a href="#ref-for-staticrange-position-5">(3)</a> <a href="#ref-for-staticrange-position-6">(4)</a>
+    <li><a href="#ref-for-staticrange-position-7">2.2. a position p1 is equal to another position p2</a> <a href="#ref-for-staticrange-position-8">(2)</a> <a href="#ref-for-staticrange-position-9">(3)</a> <a href="#ref-for-staticrange-position-10">(4)</a>
+    <li><a href="#ref-for-staticrange-position-11">2.4. to set the start position</a>
+    <li><a href="#ref-for-staticrange-position-12">2.5. to set the end position</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-position-node">
+   <b><a href="#staticrange-position-node">#staticrange-position-node</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-position-node-1">2. Algorithms</a>
+    <li><a href="#ref-for-staticrange-position-node-2">2.1. a position p1 is less than another position p2</a> <a href="#ref-for-staticrange-position-node-3">(2)</a> <a href="#ref-for-staticrange-position-node-4">(3)</a> <a href="#ref-for-staticrange-position-node-5">(4)</a>
+    <li><a href="#ref-for-staticrange-position-node-6">2.2. a position p1 is equal to another position p2</a> <a href="#ref-for-staticrange-position-node-7">(2)</a>
+    <li><a href="#ref-for-staticrange-position-node-8">2.4. to set the start position</a>
+    <li><a href="#ref-for-staticrange-position-node-9">2.5. to set the end position</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-position-offset">
+   <b><a href="#staticrange-position-offset">#staticrange-position-offset</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-position-offset-1">2. Algorithms</a>
+    <li><a href="#ref-for-staticrange-position-offset-2">2.1. a position p1 is less than another position p2</a> <a href="#ref-for-staticrange-position-offset-3">(2)</a>
+    <li><a href="#ref-for-staticrange-position-offset-4">2.2. a position p1 is equal to another position p2</a> <a href="#ref-for-staticrange-position-offset-5">(2)</a>
+    <li><a href="#ref-for-staticrange-position-offset-6">2.4. to set the start position</a>
+    <li><a href="#ref-for-staticrange-position-offset-7">2.5. to set the end position</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-start-position">
+   <b><a href="#staticrange-start-position">#staticrange-start-position</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-start-position-1">1.1. Interface StaticRange</a> <a href="#ref-for-staticrange-start-position-2">(2)</a> <a href="#ref-for-staticrange-start-position-3">(3)</a>
+    <li><a href="#ref-for-staticrange-start-position-4">2.3. to update collapsed</a>
+    <li><a href="#ref-for-staticrange-start-position-5">2.4. to set the start position</a> <a href="#ref-for-staticrange-start-position-6">(2)</a> <a href="#ref-for-staticrange-start-position-7">(3)</a>
+    <li><a href="#ref-for-staticrange-start-position-8">2.5. to set the end position</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-end-position">
+   <b><a href="#staticrange-end-position">#staticrange-end-position</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-end-position-1">1.1. Interface StaticRange</a> <a href="#ref-for-staticrange-end-position-2">(2)</a> <a href="#ref-for-staticrange-end-position-3">(3)</a>
+    <li><a href="#ref-for-staticrange-end-position-4">2.3. to update collapsed</a>
+    <li><a href="#ref-for-staticrange-end-position-5">2.4. to set the start position</a>
+    <li><a href="#ref-for-staticrange-end-position-6">2.5. to set the end position</a> <a href="#ref-for-staticrange-end-position-7">(2)</a> <a href="#ref-for-staticrange-end-position-8">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-position-is-less-than">
+   <b><a href="#staticrange-position-is-less-than">#staticrange-position-is-less-than</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-position-is-less-than-1">2.4. to set the start position</a>
+    <li><a href="#ref-for-staticrange-position-is-less-than-2">2.5. to set the end position</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-position-is-equal-to">
+   <b><a href="#staticrange-position-is-equal-to">#staticrange-position-is-equal-to</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-position-is-equal-to-1">2.3. to update collapsed</a>
+    <li><a href="#ref-for-staticrange-position-is-equal-to-2">2.4. to set the start position</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-update-collapsed">
+   <b><a href="#staticrange-update-collapsed">#staticrange-update-collapsed</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-update-collapsed-1">1.1. Interface StaticRange</a>
+    <li><a href="#ref-for-staticrange-update-collapsed-2">2.4. to set the start position</a>
+    <li><a href="#ref-for-staticrange-update-collapsed-3">2.5. to set the end position</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-set-the-start-position">
+   <b><a href="#staticrange-set-the-start-position">#staticrange-set-the-start-position</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-set-the-start-position-1">1.1. Interface StaticRange</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="staticrange-set-the-end-position">
+   <b><a href="#staticrange-set-the-end-position">#staticrange-set-the-end-position</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-staticrange-set-the-end-position-1">1.1. Interface StaticRange</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
