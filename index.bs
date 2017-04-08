@@ -3,8 +3,8 @@
 <pre class="metadata">
 Shortname: staticrange
 Level:
-Group: uievents
-Status: WD
+Group: webplatform
+Status: ED
 TR: http://www.w3.org/TR/staticrange/
 ED: https://github.com/w3c/staticrange/
 Repository: garykac/staticrange
@@ -15,6 +15,11 @@ Abstract:
 	This specification defines a lightweight StaticRange that can be used in
 	place of a {{Range}} when the complexity of a full {{Range}} is not
 	necessary.
+	
+Status Text:
+        This document is an editor's draft proposed as a First Public Working Draft. It has been developed
+	in the editing task force of the Web platform working group.
+	
 </pre>
 
 <h2 id="introduction">Introduction</h2>
