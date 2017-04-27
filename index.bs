@@ -6,8 +6,8 @@ Level:
 Group: webplatform
 Status: ED
 TR: http://www.w3.org/TR/staticrange/
-ED: https://github.com/w3c/staticrange/
-Repository: garykac/staticrange
+ED: https://w3c.github.io/staticrange/
+Repository: w3c/staticrange
 Previous Version:
 	<none>
 Editor: Gary Kacmarcik, Google, garykac@google.com
