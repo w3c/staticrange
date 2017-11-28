@@ -24,6 +24,11 @@ Status Text:
 	
 </pre>
 
+<pre class="anchors">
+urlPrefix: https://dom.spec.whatwg.org/#concept-; type: dfn;
+	text: node length
+</pre>
+
 <h2 id="introduction">Introduction</h2>
 
 	DOM4 defines a {{Range}} object (originally from DOM2 Traversal/Range) which
@@ -179,10 +184,10 @@ Status Text:
 		1. If |sr|'s [=end position=] [=StaticRange/position/is less than=] |sr|'s [=start position=],
 			1. Return False
 
-		1. If |sr|'s [=startOffset=] is greater than the size of the [=startContainer=],
+		1. If |sr|'s [=startOffset=] is greater than the [=node length=] of the [=startContainer=],
 			1. Return False
 
-		1. If |sr|'s [=endOffset=] is greater than the size of the [=endContainer=],
+		1. If |sr|'s [=endOffset=] is greater than the [=node length=] of the [=endContainer=],
 			1. Return False
 			
 		1. Return True
