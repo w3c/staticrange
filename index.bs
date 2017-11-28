@@ -181,9 +181,6 @@ Status Text:
 		1. If |sr|'s [=end position=] [=StaticRange/position/is less than=] |sr|'s [=start position=],
 			1. Return False
 
-		1. If |sr|'s [=startOffset=] is less than 0 or |sr|'s [=endOffset=] is less than 0,
-			1. Return False
-
 		1. If |sr|'s [=startOffset=] is greater than the size of the [=startContainer=],
 			1. Return False
 
