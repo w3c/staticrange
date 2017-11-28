@@ -85,9 +85,6 @@ urlPrefix: https://dom.spec.whatwg.org/#concept-; type: dfn;
 		
 		readonly attribute boolean collapsed;
 
-		void setStart(Node node, unsigned long offset);
-		void setEnd(Node node, unsigned long offset);
-
 		[NewObject] Range toRange();
 	};
 	</pre>

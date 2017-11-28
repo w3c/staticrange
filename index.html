@@ -1560,9 +1560,6 @@ in the editing task force of the Web platform working group.</p>
 		
   <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-staticrange-collapsed">collapsed<a class="self-link" href="#dom-staticrange-collapsed"></a></dfn>;
 
-  <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="method" data-export="" data-lt="setStart(node, offset)" id="dom-staticrange-setstart">setStart<a class="self-link" href="#dom-staticrange-setstart"></a></dfn>(<a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="nv idl-code" data-dfn-for="StaticRange/setStart(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setstart-node-offset-node">node<a class="self-link" href="#dom-staticrange-setstart-node-offset-node"></a></dfn>, <span class="kt">unsigned</span> <span class="kt">long</span> <dfn class="nv idl-code" data-dfn-for="StaticRange/setStart(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setstart-node-offset-offset">offset<a class="self-link" href="#dom-staticrange-setstart-node-offset-offset"></a></dfn>);
-  <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="method" data-export="" data-lt="setEnd(node, offset)" id="dom-staticrange-setend">setEnd<a class="self-link" href="#dom-staticrange-setend"></a></dfn>(<a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <dfn class="nv idl-code" data-dfn-for="StaticRange/setEnd(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setend-node-offset-node">node<a class="self-link" href="#dom-staticrange-setend-node-offset-node"></a></dfn>, <span class="kt">unsigned</span> <span class="kt">long</span> <dfn class="nv idl-code" data-dfn-for="StaticRange/setEnd(node, offset)" data-dfn-type="argument" data-export="" id="dom-staticrange-setend-node-offset-offset">offset<a class="self-link" href="#dom-staticrange-setend-node-offset-offset"></a></dfn>);
-
   [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject">NewObject</a>] <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#range">Range</a> <dfn class="nv idl-code" data-dfn-for="StaticRange" data-dfn-type="method" data-export="" data-lt="toRange()" id="dom-staticrange-torange">toRange<a class="self-link" href="#dom-staticrange-torange"></a></dfn>();
 };
 </pre>
@@ -1793,8 +1790,6 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
    <li><a href="#staticrange-position-node">position node</a><span>, in §2</span>
    <li><a href="#staticrange-position-offset">position offset</a><span>, in §2</span>
    <li><a href="#dfn-processing-equivalence">processing equivalence</a><span>, in §Unnumbered section</span>
-   <li><a href="#dom-staticrange-setend">setEnd(node, offset)</a><span>, in §1.1</span>
-   <li><a href="#dom-staticrange-setstart">setStart(node, offset)</a><span>, in §1.1</span>
    <li>
     startContainer
     <ul>
@@ -1858,9 +1853,6 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
   <span class="kt">attribute</span> <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv" data-type="unsigned long" href="#dom-staticrange-endoffset">endOffset</a>;
 		
   <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv" data-readonly="" data-type="boolean" href="#dom-staticrange-collapsed">collapsed</a>;
-
-  <span class="kt">void</span> <a class="nv" href="#dom-staticrange-setstart">setStart</a>(<a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <a class="nv" href="#dom-staticrange-setstart-node-offset-node">node</a>, <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv" href="#dom-staticrange-setstart-node-offset-offset">offset</a>);
-  <span class="kt">void</span> <a class="nv" href="#dom-staticrange-setend">setEnd</a>(<a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#node">Node</a> <a class="nv" href="#dom-staticrange-setend-node-offset-node">node</a>, <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv" href="#dom-staticrange-setend-node-offset-offset">offset</a>);
 
   [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NewObject">NewObject</a>] <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#range">Range</a> <a class="nv" href="#dom-staticrange-torange">toRange</a>();
 };
