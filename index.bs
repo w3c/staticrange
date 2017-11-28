@@ -189,9 +189,6 @@ Status Text:
 
 		1. If |sr|'s [=endOffset=] is greater than the size of the [=endContainer=],
 			1. Return False
-
-		1. If |sr|'s [=collapsed=] is not equal to the result of calling [=is collapsed=] with |sr|,
-			1. Return False
 			
 		1. Return True
 	</div>

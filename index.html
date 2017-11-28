@@ -1585,7 +1585,7 @@ in the editing task force of the Web platform working group.</p>
     <dd data-md="">
      <p>The offset into the start node identifying the <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-1">end position</a> for the range.</p>
     <dt data-md="">
-     <p><dfn class="dfn-paneled" data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-collapsed">collapsed</dfn></p>
+     <p><dfn data-dfn-for="StaticRange" data-dfn-type="dfn" data-noexport="" id="staticrange-collapsed">collapsed<a class="self-link" href="#staticrange-collapsed"></a></dfn></p>
     <dd data-md="">
      <p>True if the range’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-2">start position</a> and <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-2">end position</a> are the same, as
 determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed" id="ref-for-staticrange-is-collapsed-1">is collapsed</a>.</p>
@@ -1708,12 +1708,6 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
       </ol>
      <li data-md="">
       <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-3">endOffset</a> is greater than the size of the <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-2">endContainer</a>,</p>
-      <ol>
-       <li data-md="">
-        <p>Return False</p>
-      </ol>
-     <li data-md="">
-      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-collapsed" id="ref-for-staticrange-collapsed-1">collapsed</a> is not equal to the result of calling <a data-link-type="dfn" href="#staticrange-is-collapsed" id="ref-for-staticrange-is-collapsed-2">is collapsed</a> with <var>sr</var>,</p>
       <ol>
        <li data-md="">
         <p>Return False</p>
@@ -1924,12 +1918,6 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
     <li><a href="#ref-for-staticrange-endoffset-2">2.4. a StaticRange is valid</a> <a href="#ref-for-staticrange-endoffset-3">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="staticrange-collapsed">
-   <b><a href="#staticrange-collapsed">#staticrange-collapsed</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-staticrange-collapsed-1">2.4. a StaticRange is valid</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="staticrange-position">
    <b><a href="#staticrange-position">#staticrange-position</a></b><b>Referenced in:</b>
    <ul>
@@ -1986,7 +1974,6 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
    <b><a href="#staticrange-is-collapsed">#staticrange-is-collapsed</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-staticrange-is-collapsed-1">1.1. Interface StaticRange</a>
-    <li><a href="#ref-for-staticrange-is-collapsed-2">2.4. a StaticRange is valid</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="staticrange-is-valid">
