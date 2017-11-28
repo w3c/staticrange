@@ -27,6 +27,7 @@ Status Text:
 <pre class="anchors">
 urlPrefix: https://dom.spec.whatwg.org/#concept-; type: dfn;
 	text: node length
+	text: tree preceding
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -131,7 +132,7 @@ urlPrefix: https://dom.spec.whatwg.org/#concept-; type: dfn;
 		: Output
 		:: Boolean
 		
-		1. If |p1|'s [=position node=] is earlier in the DOM tree than |p2|'s [=position node=], return True.
+		1. If |p1|'s [=position node=] [=tree preceding|precedes=] |p2|'s [=position node=] in the DOM tree, return True.
 
 		1. If |p1|'s [=position node=] is the same as |p2|'s [=position node=], 
 			1. If |p1|'s [=position offset=] is less than |p2|'s [=position offset=], return True.
