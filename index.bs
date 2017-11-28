@@ -64,13 +64,18 @@ Status Text:
 	
 	<pre class="idl" data-highlight="webidl">
 	[Exposed=Window] interface StaticRange {
-		readonly attribute Node startContainer;
-		readonly attribute unsigned long startOffset;
+		attribute Node startContainer;
+		attribute unsigned long startOffset;
 		
-		readonly attribute Node endContainer;
-		readonly attribute unsigned long endOffset;
+		attribute Node endContainer;
+		attribute unsigned long endOffset;
 		
 		readonly attribute boolean collapsed;
+
+		void setStart(Node node, unsigned long offset);
+		void setEnd(Node node, unsigned long offset);
+
+		[NewObject] Range toRange();
 	};
 	</pre>
 
