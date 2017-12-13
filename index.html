@@ -1662,7 +1662,7 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
     </dl>
     <ol>
      <li data-md="">
-      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-3">start position</a> <a data-link-type="dfn" href="#staticrange-position-is-equal-to" id="ref-for-staticrange-position-is-equal-to-1">is equal to</a> <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-3">end position</a>,</p>
+      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-3">start position</a>'s <a data-link-type="dfn" href="https://www.w3.org/TR/dom41/#concept-tree-root">root</a> is not the same as <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-3">end position</a>'s <a data-link-type="dfn" href="https://www.w3.org/TR/dom41/#concept-tree-root">root</a>,</p>
       <ol>
        <li data-md="">
         <p>Return True</p>
@@ -1684,6 +1684,13 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
       <p>Boolean</p>
     </dl>
     <ol>
+     <li data-md="">
+      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-4">end position</a>'s
+	      <a data-link-type="dfn" href="#staticrange-position-is-less-than" id="ref-for-staticrange-position-is-less-than-1">is less than</a> <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-4">start position</a>,</p>
+      <ol>
+       <li data-md="">
+        <p>Return False</p>
+      </ol>
      <li data-md="">
       <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-4">end position</a> <a data-link-type="dfn" href="#staticrange-position-is-less-than" id="ref-for-staticrange-position-is-less-than-1">is less than</a> <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-4">start position</a>,</p>
       <ol>
