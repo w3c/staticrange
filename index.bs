@@ -178,6 +178,9 @@ urlPrefix: https://dom.spec.whatwg.org/#concept-; type: dfn;
 		
 		: Output
 		:: Boolean
+		
+		1. If |sr|'s [=start position=]'s [=root=] is not the same as |sr|'s [=end position=]'s [=root=],
+		        1. Return False 
 
 		1. If |sr|'s [=end position=] [=StaticRange/position/is less than=] |sr|'s [=start position=],
 			1. Return False
