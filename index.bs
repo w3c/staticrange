@@ -28,6 +28,7 @@ Status Text:
 urlPrefix: https://dom.spec.whatwg.org/#concept-; type: dfn;
 	text: node length
 	text: tree preceding
+	text: tree ancestor
 </pre>
 
 <h2 id="introduction">Introduction</h2>
@@ -179,6 +180,9 @@ urlPrefix: https://dom.spec.whatwg.org/#concept-; type: dfn;
 		: Output
 		:: Boolean
 
+		1. If |sr|'s [=startContainer=] and [=endContainer=] do not share the same [=tree ancestor|ancestor=],
+			1. Return False
+		
 		1. If |sr|'s [=end position=] [=StaticRange/position/is less than=] |sr|'s [=start position=],
 			1. Return False
 

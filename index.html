@@ -1424,7 +1424,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1>Static Range</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-11-28">28 November 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-12-14">14 December 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1685,19 +1685,25 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
     </dl>
     <ol>
      <li data-md="">
+      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-2">startContainer</a> and <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-2">endContainer</a> do not share the same <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-ancestor">ancestor</a>,</p>
+      <ol>
+       <li data-md="">
+        <p>Return False</p>
+      </ol>
+     <li data-md="">
       <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-end-position" id="ref-for-staticrange-end-position-4">end position</a> <a data-link-type="dfn" href="#staticrange-position-is-less-than" id="ref-for-staticrange-position-is-less-than-1">is less than</a> <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-start-position" id="ref-for-staticrange-start-position-4">start position</a>,</p>
       <ol>
        <li data-md="">
         <p>Return False</p>
       </ol>
      <li data-md="">
-      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startoffset" id="ref-for-staticrange-startoffset-2">startOffset</a> is greater than the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-length">node length</a> of the <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-2">startContainer</a>,</p>
+      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-startoffset" id="ref-for-staticrange-startoffset-2">startOffset</a> is greater than the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-length">node length</a> of the <a data-link-type="dfn" href="#staticrange-startcontainer" id="ref-for-staticrange-startcontainer-3">startContainer</a>,</p>
       <ol>
        <li data-md="">
         <p>Return False</p>
       </ol>
      <li data-md="">
-      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-2">endOffset</a> is greater than the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-length">node length</a> of the <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-2">endContainer</a>,</p>
+      <p>If <var>sr</var>’s <a data-link-type="dfn" href="#staticrange-endoffset" id="ref-for-staticrange-endoffset-2">endOffset</a> is greater than the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-node-length">node length</a> of the <a data-link-type="dfn" href="#staticrange-endcontainer" id="ref-for-staticrange-endcontainer-3">endContainer</a>,</p>
       <ol>
        <li data-md="">
         <p>Return False</p>
@@ -1879,7 +1885,7 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
    <b><a href="#staticrange-startcontainer">#staticrange-startcontainer</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-staticrange-startcontainer-1">2. Algorithms</a>
-    <li><a href="#ref-for-staticrange-startcontainer-2">2.4. a StaticRange is valid</a>
+    <li><a href="#ref-for-staticrange-startcontainer-2">2.4. a StaticRange is valid</a> <a href="#ref-for-staticrange-startcontainer-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="staticrange-startoffset">
@@ -1893,7 +1899,7 @@ determined by executing <a data-link-type="dfn" href="#staticrange-is-collapsed"
    <b><a href="#staticrange-endcontainer">#staticrange-endcontainer</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-staticrange-endcontainer-1">2. Algorithms</a>
-    <li><a href="#ref-for-staticrange-endcontainer-2">2.4. a StaticRange is valid</a>
+    <li><a href="#ref-for-staticrange-endcontainer-2">2.4. a StaticRange is valid</a> <a href="#ref-for-staticrange-endcontainer-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="staticrange-endoffset">
